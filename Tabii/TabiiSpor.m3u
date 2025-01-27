@@ -30,7 +30,7 @@ https://tv8-live.daioncdn.net/tv8/tv8.m3u8
 https://tv8-live.daioncdn.net/tv8bucuk/tv8bucuk.m3u8
 
 #EXTINF:-1 tvg-name="A TV" tvg-language="Turkish" tvg-country="TR" tvg-id="atv" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Atv_logo_2010.svg/930px-Atv_logo_2010.svg.png" group-title="Diğerleri", A TV
-
+https://
 
 #EXTINF:-1 tvg-name="TRT Yıldız" tvg-language="Turkish" tvg-country="TR" tvg-id="trtyildiz" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/23855_1-0-465-262.jpeg" group-title="Diğerleri",TRT Yıldız
 https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=clean
