@@ -26,7 +26,7 @@ https://tv-trtspor1.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-name="TV 8" tvg-language="Turkish" tvg-country="TR" tvg-id="tv8" tvg-logo="https://www.campaigntr.com/wp-content/uploads/2014/09/tv8-logo.png" group-title="Diğerleri",TV 8
 https://tv8-live.daioncdn.net/tv8/tv8.m3u8
 
-#EXTINF:-1 tvg-name="TV 8,5" tvg-language="Turkish" tvg-country="TR" tvg-id="tv8bucuk" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/43023.jpeg" group-title="Diğerleri", TV 8,5
+#EXTINF:-1 tvg-name="TV 8.5" tvg-language="Turkish" tvg-country="TR" tvg-id="tv8bucuk" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/43023.jpeg" group-title="Diğerleri", TV 8.5
 https://tv8-live.daioncdn.net/tv8bucuk/tv8bucuk.m3u8
 
 #EXTINF:-1 tvg-name="A TV" tvg-language="Turkish" tvg-country="TR" tvg-id="atv" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Atv_logo_2010.svg/930px-Atv_logo_2010.svg.png" group-title="Diğerleri", A TV
