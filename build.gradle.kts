@@ -1,11 +1,6 @@
 import com.lagradost.cloudstream3.gradle.CloudstreamExtension
 import com.android.build.gradle.BaseExtension
 
-plugins {
-    id("com.android.library") apply false
-    id("org.jetbrains.kotlin.android") version "1.8.20" apply false
-}
-
 buildscript {
     repositories {
         google()
@@ -34,7 +29,7 @@ subprojects {
     apply(plugin = "com.lagradost.cloudstream3.gradle")
 
     configure<com.lagradost.cloudstream3.gradle.CloudstreamExtension> {
-        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "user/repo")
+        setRepo(System.getenv("MY_GITHUB_REPOSITORY") ?: "https://github.com/sarapcanagii/Pitipitii")
         authors = listOf("sarapcanagii")
     }
 
