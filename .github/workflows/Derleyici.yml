@@ -51,7 +51,7 @@ jobs:
           cd $GITHUB_WORKSPACE/src
           chmod +x gradlew
           ./gradlew make makePluginsJson
-          cp build/*.cs3 $GITHUB_WORKSPACE/builds || true
+          cp DiziPal/build/*.cs3 $GITHUB_WORKSPACE/builds || true
           cp build/plugins.json $GITHUB_WORKSPACE/builds || true
 
       - name: Derlemeleri Yükle
