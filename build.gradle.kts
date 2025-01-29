@@ -1,18 +1,14 @@
-import com.lagradost.cloudstream3.gradle.CloudstreamExtension
-import com.android.build.gradle.BaseExtension
-
-
 buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = uri("https://jitpack.io") }
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.4.2")  // Android Gradle Plugin versiyonunu düşürdüm
-        classpath("com.github.recloudstream:gradle:master-SNAPSHOT")  // main-SNAPSHOT kullanıyoruz
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")  // Kotlin plugin versiyonunu düzelttim
+        classpath("com.android.tools.build:gradle:7.4.2")
+        classpath("com.github.recloudstream:gradle:master-SNAPSHOT")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
     }
 }
 
@@ -20,7 +16,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
@@ -41,11 +37,11 @@ subprojects {
     android {
         namespace = "com.sarapcanagii"
 
-        compileSdkVersion(33)  // SDK versiyonunu 33'e düşürdüm
+        compileSdk = 33
 
         defaultConfig {
             minSdk = 21
-            targetSdk = 33  // Target SDK'yı da 33'e düşürdüm
+            targetSdk = 33
         }
 
         compileOptions {
@@ -53,7 +49,7 @@ subprojects {
             targetCompatibility = JavaVersion.VERSION_1_8
         }
 
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {  // KotlinJvmCompile yerine KotlinCompile
+        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
                 jvmTarget = "1.8"
             }
@@ -75,7 +71,7 @@ subprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
+tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
 
