@@ -39,6 +39,9 @@ jobs:
 
       - name: Android SDK Ayarla
         uses: android-actions/setup-android@v3.2.2
+        
+      - name: "'src' Depo Kontrolü"
+        uses: actions/checkout@v4.2.2
 
       - name: Eklentileri Derle
         run: |
