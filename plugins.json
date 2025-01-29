@@ -18,5 +18,24 @@
         "description": "en yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPal.cs3",
         "name": "DiziPal"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
+        "fileSize": 17194,
+        "status": 1,
+        "language": "tr",
+        "authors": [
+            "sarapcanagii"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 4,
+        "internalName": "Tabii",
+        "description": "TabiiSpor",
+        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/Tabii.cs3",
+        "name": "Tabii"
     }
 ]
