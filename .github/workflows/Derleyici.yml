@@ -6,6 +6,8 @@ concurrency:
 
 on:
   workflow_dispatch:
+  permissions:
+       contents: write
   push:
     branches:
       - master
