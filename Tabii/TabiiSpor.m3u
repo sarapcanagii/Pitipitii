@@ -18,9 +18,10 @@ https://bfxy3jgeydpbphtk8qfqwm3hr.medya.trt.com.tr/master.m3u8
 https://z3mmimwz148csv0vaxtphqspf.medya.trt.com.tr/master.m3u8
 
 #EXTINF:-1 tvg-name="Tabii Spor 6" tvg-language="Turkish" tvg-country="TR" tvg-id="TabiiSpor6" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/43020.jpeg" group-title="TabiiSpor",Tabii Spor 6
-https://vbtob9hyq58eiophct5qctxr2.medya.trt.com.tr/master.m3u8
+https://vbtob9hyq58eiophct5qctxr2.medya.trt.com.tr/master_1080.m3u8
 
 #EXTINF:-1 tvg-name="TRT 1" tvg-language="Turkish" tvg-country="TR" tvg-id="Trt1" tvg-logo="https://cms-rotf-api.tabii.com/r/int/w500/23846_1-0-465-262.jpeg" group-title="Diğerleri", TRT 1
+https://tv-trt1.medya.trt.com.tr/master_1080.m3u8
 
 #EXTINF:-1 tvg-name="TRT SPOR" tvg-language="Turkish" tvg-country="TR" tvg-id="TrtSpor" tvg-logo="https://cms-rotf-api.tabii.com/r/int/w500/40480_0-0-465-261.jpeg" group-title="Diğerleri", TRT SPOR
 https://tv-trtspor1.medya.trt.com.tr/master.m3u8
