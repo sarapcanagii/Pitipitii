@@ -22,11 +22,14 @@ jobs:
     steps:
       - name: "'src' Depo Kontrolü"
         uses: actions/checkout@v4.2.2
+        with:
+          path: "src"
 
       - name: "'build' Depo Kontrolü"
         uses: actions/checkout@v4.2.2
         with:
           ref: "builds"
+          path: "builds"
 
       - name: Eski Derlemeleri Temizle
         run: rm -f $GITHUB_WORKSPACE/builds/*.cs3 || true
@@ -39,9 +42,6 @@ jobs:
 
       - name: Android SDK Ayarla
         uses: android-actions/setup-android@v3.2.2
-        
-      - name: "'src' Depo Kontrolü"
-        uses: actions/checkout@v4.2.2
 
       - name: Eklentileri Derle
         run: |
@@ -59,3 +59,4 @@ jobs:
           git add .
           git commit --amend -m "$GITHUB_SHA::7 'nın Derlenmesi" || exit 0
           git push --force
+          
