@@ -14,7 +14,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.7.3")
         // Cloudstream gradle plugin which makes everything work and builds plugins
         classpath("com.github.recloudstream:gradle:master-SNAPSHOT")
-        classpath("com.github.recloudstream:gradle:master-5ef8c00cd2")
+        classpath("com.github.recloudstream:gradle:master-e9e202f")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
     }
 }
