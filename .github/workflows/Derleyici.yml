@@ -18,6 +18,8 @@ on:
       - "**/*.jpg"
       - "**/*.png"
       - "**/*.py"
+      - "**/*.m3u"
+      
 
 jobs:
   CloudStreamDerleyici:
