@@ -60,5 +60,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
-          git commit --amend -m "$GITHUB_SHA::7 'nın Derlenmesi" || exit 0
-          git push --force
+          git commit -m "$GITHUB_SHA::7 'nın Derlenmesi" || echo "Nothing to commit"
+          git push --set-upstream origin builds --force
