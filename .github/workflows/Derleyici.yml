@@ -59,4 +59,3 @@ jobs:
           git add .
           git commit --amend -m "$GITHUB_SHA::7 'nın Derlenmesi" || exit 0
           git push --force
-          
