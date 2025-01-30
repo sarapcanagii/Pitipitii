@@ -12,7 +12,7 @@ import okhttp3.Response
 import org.jsoup.Jsoup
 
 class DiziPalV2 : MainAPI() {
-    override var mainUrl = "https://dizipal834.com"
+    override var mainUrl = "https://dizipal3.com/"
     override var name = "DiziPal V2"
     override val hasMainPage = true
     override var lang = "tr"
@@ -65,8 +65,8 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/yeni-eklenen-bolumler")) {
-            document.select("div.episode-item").mapNotNull { it.sonBolumler() }
+        val home = if (request.data.contains("/tum-bolumler")) {
+            document.select("div.episode-box").mapNotNull { it.sonBolumler() }
         } else {
             document.select("article.type2 ul li").mapNotNull { it.diziler() }
         }
@@ -75,8 +75,8 @@ class DiziPalV2 : MainAPI() {
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("div.name")?.text() ?: return null
-        val episode = this.selectFirst("div.episode")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val name = this.selectFirst("div.serie-name")?.text() ?: return null
+        val episode = this.selectFirst("div.episode-name")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
         val title = "$name $episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
