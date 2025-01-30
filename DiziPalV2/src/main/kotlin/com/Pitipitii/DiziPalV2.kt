@@ -86,6 +86,31 @@ class DiziPalV2 : MainAPI() {
             this.posterUrl = posterUrl
         }
     }
+    
+    private suspend fun Element.extractEpisodeDetails(): SearchResponse? {
+    // Bölüm başlığı ve sezon bilgisi
+    val title = this.selectFirst("h2.text-white")?.text() ?: return null
+    val episodeInfo = this.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text() ?: return null
+
+    // Bölüm bağlantısı
+    val href = this.selectFirst("a")?.attr("href") ?: return null
+
+    // Resim URL'si
+    val posterUrl = this.selectFirst("img")?.attr("srcset")?.split(",")?.first()?.split(" ")?.first()
+
+    // Bölüm başlığı ve sezon bilgisi birleştirilerek tam başlık oluşturuluyor
+    val fullTitle = "$title $episodeInfo"
+
+    return newTvSeriesSearchResponse(fullTitle, href, TvType.TvSeries) {
+        this.posterUrl = posterUrl
+    }
+}
+
+override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
+    val document = app.get(request.data).document
+    val episodes = document.select("div.grid.grid-cols-1.sm:grid-cols-3.gap-2 a").mapNotNull { it.extractEpisodeDetails() }
+    return newHomePageResponse(request.name, episodes, hasNext = false)
+}
 
     private fun Element.diziler(): SearchResponse? {
         val title = this.selectFirst("span.title")?.text() ?: return null
