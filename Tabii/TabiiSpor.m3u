@@ -27,7 +27,7 @@ https://tv-trt1.medya.trt.com.tr/master_1080.m3u8
 https://tv-trtspor1.medya.trt.com.tr/master_1080.m3u8
 
 #EXTINF:-1 tvg-name="TRT Spor Yıldız" tvg-language="Turkish" tvg-country="TR" tvg-id="trtsporyildiz" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/23855_1-0-465-262.jpeg" group-title="Diğerleri",TRT Spor Yıldız
-https://trt.daioncdn.net/trtspor-yildiz/master_1080p.m3u8?app=clean
+https://trt.daioncdn.net/trtspor-yildiz/master_720p.m3u8?app=clean
 
 #EXTINF:-1 tvg-name="TV 8" tvg-language="Turkish" tvg-country="TR" tvg-id="tv8" tvg-logo="https://www.campaigntr.com/wp-content/uploads/2014/09/tv8-logo.png" group-title="Diğerleri",TV 8
 https://tv8-live.daioncdn.net/tv8/tv8_1080p.m3u8
