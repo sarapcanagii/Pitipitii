@@ -48,7 +48,7 @@ jobs:
       - name: Android SDK Ayarla
         uses: android-actions/setup-android@v3.2.2
 
-      - name: Clear Gradle Cache
+      - name: Gradle Önbelleğini Temizle
         run: rm -rf ~/.gradle/caches/
 
       - name: Eklentileri Derle
