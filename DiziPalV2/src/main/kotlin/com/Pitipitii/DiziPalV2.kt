@@ -11,9 +11,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import org.jsoup.Jsoup
 
-class DiziPalV2 : MainAPI() {
-    override var mainUrl = "https://dizipal3.com/"
-    override var name = "DiziPal V2"
+class DiziPal : MainAPI() {
+    override var mainUrl = "https://dizipal34.com"
+    override var name = "DiziPal"
     override val hasMainPage = true
     override var lang = "tr"
     override val hasQuickSearch = true
@@ -44,16 +44,16 @@ class DiziPalV2 : MainAPI() {
 
     override val mainPage = mainPageOf(
         "${mainUrl}/diziler/son-bolumler" to "Son Bölümler",
-        "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
-        "${mainUrl}/hd-film-izle" to "Yeni Filmler",
-        "${mainUrl}/kanal/netflix" to "Netflix",
-        "${mainUrl}/kanal/exxen" to "Exxen",
-        "${mainUrl}/kanal/blutv" to "BluTV",
-        "${mainUrl}/kanal/disney" to "Disney+",
-        "${mainUrl}/kanal/amazon-prime" to "Amazon Prime",
-        "${mainUrl}/kanal/tod-bein" to "TOD (beIN)",
-        "${mainUrl}/kanal/gain" to "Gain",
-        "${mainUrl}/kanal/tabii" to "Tabii",
+        "${mainUrl}/diziler" to "Yeni Diziler",
+        "${mainUrl}/filmler" to "Yeni Filmler",
+        "${mainUrl}/koleksiyon/netflix" to "Netflix",
+        "${mainUrl}/koleksiyon/exxen" to "Exxen",
+        "${mainUrl}/koleksiyon/blutv" to "BluTV",
+        "${mainUrl}/koleksiyon/disney" to "Disney+",
+        "${mainUrl}/koleksiyon/amazon-prime" to "Amazon Prime",
+        "${mainUrl}/koleksiyon/tod-bein" to "TOD (beIN)",
+        "${mainUrl}/koleksiyon/gain" to "Gain",
+        "${mainUrl}/tur/mubi" to "Mubi",
         "${mainUrl}/diziler?kelime=&durum=&tur=26&type=&siralama=" to "Anime",
         "${mainUrl}/diziler?kelime=&durum=&tur=5&type=&siralama=" to "Bilimkurgu Dizileri",
         "${mainUrl}/tur/bilimkurgu" to "Bilimkurgu Filmleri",
@@ -65,8 +65,8 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/tum-bolumler")) {
-            document.select("div.episode-box").mapNotNull { it.sonBolumler() }
+        val home = if (request.data.contains("/diziler/son-bolumler")) {
+            document.select("div.episode-item").mapNotNull { it.sonBolumler() }
         } else {
             document.select("article.type2 ul li").mapNotNull { it.diziler() }
         }
@@ -75,8 +75,8 @@ class DiziPalV2 : MainAPI() {
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("div.serie-name")?.text() ?: return null
-        val episode = this.selectFirst("div.episode-name")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val name = this.selectFirst("div.name")?.text() ?: return null
+        val episode = this.selectFirst("div.episode")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
         val title = "$name $episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
