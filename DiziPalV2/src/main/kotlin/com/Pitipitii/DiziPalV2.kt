@@ -75,17 +75,26 @@ class DiziPalV2 : MainAPI() {
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("h2.text-white.text-sm.line-clamp-1.text-ellipsis.overflow-hidden.font-bold")?.text() ?: return null
-        val episode = this.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
-        val title = "$name $episode"
+    // Select the title using the correct class names
+    val name = this.selectFirst("h2.text-white.text-sm.line-clamp-1.text-ellipsis.overflow-hidden.font-bold")?.text() ?: return null
+    
+    // Select the episode information, replacing season and episode parts correctly
+    val episode = this.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.replace("Sezon ", "x")?.replace("Bölüm", "") ?: return null
+    val title = "$name $episode"
 
-        val href = fixUrlNull(this.selectFirst("a.relative.w-full.rounded-lg.flex.items-center.gap-4.bg-[#1d1d1d].p-2")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img.w-24.h-16.object-cover.rounded-md.lazyload")?.attr("data-src"))
+    // Select the anchor tag and get the href attribute
+    val href = this.selectFirst("a.relative.w-full.rounded-lg.flex.items-center.gap-4.bg\\[\\#1d1d1d\\].p-2")?.attr("href") ?: return null
+    val fixedHref = fixUrlNull(href) ?: return null
 
-        return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) {
-            this.posterUrl = posterUrl
-        }
+    // Select the image and get the data-src attribute for lazy loading
+    val posterUrl = this.selectFirst("img.w-24.h-16.object-cover.rounded-md.lazyload")?.attr("data-src")
+    val fixedPosterUrl = posterUrl?.let { fixUrlNull(it) }
+
+    // Create a new TV series search response
+    return newTvSeriesSearchResponse(title, fixedHref.substringBefore("/sezon"), TvType.TvSeries) {
+        this.posterUrl = fixedPosterUrl
     }
+}
 
     private fun Element.diziler(): SearchResponse? {
         val title = this.selectFirst("span.title")?.text() ?: return null
