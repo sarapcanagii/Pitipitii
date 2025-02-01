@@ -5,7 +5,7 @@ from re           import findall
 
 oturum  = CloudScraper()
 
-mainUrl = "https://dizipal34.com/"
+mainUrl = "https://dizipal835.com/"
 pageUrl = f"{mainUrl}/diziler?kelime=&durum=&tur=1&type=&siralama="
 istek   = oturum.get(pageUrl)
 secici  = Selector(istek.text)

@@ -12,7 +12,7 @@ import okhttp3.Response
 import org.jsoup.Jsoup
 
 class DiziPalV2 : MainAPI() {
-    override var mainUrl = "https://dizipal34.com"
+    override var mainUrl = "https://dizipal835.com"
     override var name = "DiziPalV2"
     override val hasMainPage = true
     override var lang = "tr"
@@ -43,7 +43,7 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf(
-        "${mainUrl}/diziler/son-bolumler" to "Son Bölümler",
+        "${mainUrl}/yeni-eklenen-bolumler" to "Son Bölümler",
         "${mainUrl}/diziler" to "Yeni Diziler",
         "${mainUrl}/filmler" to "Yeni Filmler",
         "${mainUrl}/koleksiyon/netflix" to "Netflix",
@@ -65,7 +65,7 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/diziler/son-bolumler")) {
+        val home = if (request.data.contains("/yeni-eklenen-bolumler")) {
             document.select("div.episode-item").mapNotNull { it.sonBolumler() }
         } else {
             document.select("article.type2 ul li").mapNotNull { it.diziler() }
@@ -75,12 +75,12 @@ class DiziPalV2 : MainAPI() {
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("div.name")?.text() ?: return null
-        val episode = this.selectFirst("div.episode")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val name = this.selectFirst("h2.text-white.text-sm.line-clamp-1.text-ellipsis.overflow-hidden.font-bold")?.text() ?: return null
+        val episode = this.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
         val title = "$name $episode"
 
-        val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val href = fixUrlNull(this.selectFirst("a.relative.w-full.rounded-lg.flex.items-center.gap-4.bg-[#1d1d1d].p-2")?.attr("href")) ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("img.w-24.h-16.object-cover.rounded-md.lazyload")?.attr("data-src"))
 
         return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) {
             this.posterUrl = posterUrl
