@@ -1,8 +1,7 @@
 name: Update DiziPal Link
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # Her gün UTC sıfırında çalışır
+  workflow_dispatch:
 
 jobs:
   update-link:
