@@ -1,12 +1,11 @@
-name: Run JavaScript
+name: Update DiziPal Link
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *' # Her gün UTC sıfırında çalışır
 
 jobs:
-  run-js:
+  update-link:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +16,8 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Run JavaScript file
+    - name: Install Puppeteer
+      run: npm install puppeteer
+
+    - name: Run JavaScript to update link
       run: node test.js
