@@ -108,8 +108,8 @@ class DiziPal : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        // Burada query değişkenine "A" değerini atıyoruz
-        val modifiedQuery = "A"
+        // Eğer query boşsa veya belirli bir koşul sağlanıyorsa "A" değerini kullanabiliriz.
+        val effectiveQuery = if (query.isBlank()) "A" else query
 
         val responseRaw = app.post(
             "${mainUrl}/api/search-autocomplete",
@@ -118,8 +118,8 @@ class DiziPal : MainAPI() {
                 "X-Requested-With" to "XMLHttpRequest"
             ),
             referer = "${mainUrl}/",
-            // data map'ine modifiedQuery kullanarak "query" için "A" değerini ekliyoruz
-            data = mapOf("query" to modifiedQuery)
+            // data map'ine effectiveQuery kullanarak sorguyu gönderiyoruz
+            data = mapOf("query" to effectiveQuery)
         )
 
         val searchItemsMap = jacksonObjectMapper().readValue<Map<String, SearchItem>>(responseRaw.text)
