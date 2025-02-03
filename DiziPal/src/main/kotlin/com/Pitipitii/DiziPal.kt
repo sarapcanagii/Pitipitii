@@ -107,25 +107,23 @@ class DiziPal : MainAPI() {
         }
     }
 
+    bu kodda ki query anahtarına A değerini eklermisin
+
+
     override suspend fun search(query: String): List<SearchResponse> {
-       val effectiveQuery = if (query.isBlank()) "A" else query
+        val responseRaw = app.post(
+            "${mainUrl}/api/search-autocomplete",
+            headers = mapOf(
+                "Accept" to "application/json, text/javascript, */*; q=0.01",
+                "X-Requested-With" to "XMLHttpRequest"
+            ),
+            referer = "${mainUrl}/",
+            data = mapOf("query" to query)
+        )
 
-       // Boşlukları URL uyumlu hale getirin
-       val encodedQuery = java.net.URLEncoder.encode(effectiveQuery, "UTF-8")
-
-       val responseRaw = app.post(
-           "${mainUrl}/api/search-autocomplete",
-           headers = mapOf(
-               "Accept" to "application/json, text/javascript, */*; q=0.01",
-               "X-Requested-With" to "XMLHttpRequest"
-           ),
-           referer = "${mainUrl}/",
-           data = mapOf("query" to encodedQuery)
-       )
-
-       val searchItemsMap = jacksonObjectMapper().readValue<Map<String, SearchItem>>(responseRaw.text)
-       return searchItemsMap.values.map { it.toPostSearchResult() }
-   }
+        val searchItemsMap = jacksonObjectMapper().readValue<Map<String, SearchItem>>(responseRaw.text)
+        return searchItemsMap.values.map { it.toPostSearchResult() }
+    }
 
     override suspend fun quickSearch(query: String): List<SearchResponse> = search(query)
 
