@@ -1,7 +1,9 @@
 name: Update DiziPal Link
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Her gün UTC sıfırında çalışır
+  workflow_dispatch: # Manuel tetikleme için eklendi
 
 jobs:
   update-link:
@@ -13,7 +15,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14'
+        node-version: '16' # Node.js 16 veya daha yeni bir sürüm kullanın
 
     - name: Install Puppeteer
       run: npm install puppeteer
