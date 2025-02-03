@@ -107,9 +107,6 @@ class DiziPal : MainAPI() {
         }
     }
 
-    bu kodda ki query anahtarına A değerini eklermisin
-
-
     override suspend fun search(query: String): List<SearchResponse> {
         val responseRaw = app.post(
             "${mainUrl}/api/search-autocomplete",
