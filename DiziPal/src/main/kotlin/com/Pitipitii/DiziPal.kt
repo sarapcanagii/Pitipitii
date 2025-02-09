@@ -1,7 +1,6 @@
 package com.sarapcanagii
 
 import android.util.Log
-import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
@@ -9,14 +8,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.lagradost.cloudstream3.network.CloudflareKiller
 import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import okhttp3.Response
-import java.net.InetSocketAddress
-import java.net.Proxy
-
-// Proxy configuration
-val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("216.229.112.25", 8080))
-val client = OkHttpClient.Builder().proxy(proxy).build()
+import org.jsoup.Jsoup
 
 class DiziPal : MainAPI() {
     override var mainUrl = "https://dizipal873.com"
@@ -27,8 +20,11 @@ class DiziPal : MainAPI() {
     override val hasChromecastSupport = true
     override val hasDownloadSupport = true
     override val supportedTypes = setOf(TvType.TvSeries, TvType.Movie)
+
+    // CloudFlare bypass
     override var sequentialMainPage = true
 
+    // CloudFlare v2
     private val cloudflareKiller by lazy { CloudflareKiller() }
     private val interceptor by lazy { CloudflareInterceptor(cloudflareKiller) }
 
@@ -38,11 +34,11 @@ class DiziPal : MainAPI() {
             val response = chain.proceed(request)
             val doc = Jsoup.parse(response.peekBody(1024 * 1024).string())
 
-            return if (doc.select("title").text() in listOf("Just a moment...", "Bir dakika lütfen...")) {
-                cloudflareKiller.intercept(chain)
-            } else {
-                response
+            if (doc.select("title").text() == "Just a moment..." || doc.select("title").text() == "Bir dakika lütfen...") {
+                return cloudflareKiller.intercept(chain)
             }
+
+            return response
         }
     }
 
@@ -70,40 +66,38 @@ class DiziPal : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
         val home = if (request.data.contains("/diziler/son-bolumler")) {
-            document.select("div.episode-item").mapNotNull { it.toSonBolumler() }
+            document.select("div.episode-item").mapNotNull { it.sonBolumler() }
         } else {
-            document.select("article.type2 ul li").mapNotNull { it.toDiziler() }
+            document.select("article.type2 ul li").mapNotNull { it.diziler() }
         }
-        
+
         return newHomePageResponse(request.name, home, hasNext = false)
     }
 
-    private suspend fun Element.toSonBolumler(): SearchResponse? {
-        val name = selectFirst("div.name")?.text() ?: return null
-        val episode = selectFirst("div.episode")?.text()?.trim()
-            ?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+    private suspend fun Element.sonBolumler(): SearchResponse? {
+        val name = this.selectFirst("div.name")?.text() ?: return null
+        val episode = this.selectFirst("div.episode")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
         val title = "$name $episode"
-        val href = fixUrlNull(selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(selectFirst("img")?.attr("src"))
+
+        val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
 
         return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) {
             this.posterUrl = posterUrl
         }
     }
 
-    private fun Element.toDiziler(): SearchResponse? {
-        val title = selectFirst("span.title")?.text() ?: return null
-        val href = fixUrlNull(selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(selectFirst("img")?.attr("src"))
+    private fun Element.diziler(): SearchResponse? {
+        val title = this.selectFirst("span.title")?.text() ?: return null
+        val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
 
-        return newTvSeriesSearchResponse(title, href, TvType.TvSeries) {
-            this.posterUrl = posterUrl
-        }
+        return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
     }
 
     private fun SearchItem.toPostSearchResult(): SearchResponse {
         val title = this.title
-        val href = "$mainUrl${this.url}"
+        val href = "${mainUrl}${this.url}"
         val posterUrl = this.poster
 
         return if (this.type == "series") {
@@ -120,7 +114,7 @@ class DiziPal : MainAPI() {
                 "Accept" to "application/json, text/javascript, */*; q=0.01",
                 "X-Requested-With" to "XMLHttpRequest"
             ),
-            referer = "$mainUrl/",
+            referer = "${mainUrl}/",
             data = mapOf("query" to query)
         )
 
@@ -132,6 +126,7 @@ class DiziPal : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
+
         val poster = fixUrlNull(document.selectFirst("[property='og:image']")?.attr("content"))
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
