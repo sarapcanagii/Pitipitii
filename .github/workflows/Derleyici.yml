@@ -19,7 +19,6 @@ on:
       - "**/*.png"
       - "**/*.py"
       - "**/*.m3u"
-      - "**/*.js"
 jobs:
   CloudStreamDerleyici:
     runs-on: ubuntu-latest
