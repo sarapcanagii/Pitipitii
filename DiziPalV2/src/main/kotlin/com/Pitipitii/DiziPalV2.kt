@@ -66,7 +66,7 @@ override val mainPage = mainPageOf(
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
         val home = if (request.data.contains("/yabanci-dizi-izle")) {
-            document.select("div.grid.grid-cols-2.sm:grid-cols-5.gap-3.new-added-list").mapNotNull { it.sonBolumler() }
+            document.select("div.grid.grid-cols-2.sm\\:grid-cols-5.gap-3.new-added-list").mapNotNull { it.sonBolumler() }
         } else {
             document.select("article.type2 ul li").mapNotNull { it.diziler() }
         }
