@@ -140,7 +140,6 @@ if (year == null) {
     .flatMap { it.trim().split(" ") } // Boşluklara göre böler
     .filter { it.isNotEmpty() } // Boş olanları temizler
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
-        val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
         return if (url.contains("/dizi/")) {
             val title = document.selectFirst("div.absolute h1")?.text() ?: return null
@@ -165,7 +164,6 @@ if (year == null) {
                 this.plot = description
                 this.tags = tags
                 this.rating = rating
-                this.duration = duration
             }
         } else {
             val title = document.selectXpath("//div[@class='g-title'][2]/div").text().trim()
@@ -176,7 +174,6 @@ if (year == null) {
                 this.plot = description
                 this.tags = tags
                 this.rating = rating
-                this.duration = duration
             }
         }
     }

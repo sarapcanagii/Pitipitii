@@ -10,7 +10,6 @@ data class SearchItem(
     @JsonProperty("poster") val poster: String,
     @JsonProperty("genres") val genres: String,
     @JsonProperty("imdb") val imdb: String,
-    @JsonProperty("duration") val duration: String,
     @JsonProperty("year") val year: String,
     @JsonProperty("view") val view: Int,
     @JsonProperty("type") val type: String = "defaultType",
