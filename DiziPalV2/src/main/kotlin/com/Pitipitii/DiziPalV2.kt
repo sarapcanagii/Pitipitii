@@ -123,22 +123,22 @@ class DiziPalV2 : MainAPI() {
         val document = app.get(url).document
         val divElement = document.selectFirst("div.w-full")
         val poster = divElement?.selectFirst("img")?.attr("src")
-        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
-    .firstOrNull()  // Liste boşsa null döndürür
-    ?.text()        // null değilse metni alır
-    ?.trim()        // null değilse boşlukları temizler
-    ?.toIntOrNull() // null değilse integer'a çevirir
+        val year = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Gösterim Yılı']]/div[@class='value']/text()")
+            .firstOrNull() // Liste boşsa null döndürür
+            ?.text()       // null değilse metni alır
+            ?.trim()       // null değilse boşlukları temizler
+            ?.toIntOrNull() // null değilse integer'a çevirir
 
-if (year == null) {
-    println("Gösterim yılı bulunamadı veya geçersiz.")
-} else {
-    println("Gösterim yılı: $year")
-}
+    if (year == null) {
+        println("Gösterim yılı bulunamadı veya geçersiz.")
+    } else {
+        println("Gösterim yılı: $year")
+    }
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
-    .eachText() // Tüm <a> etiketlerinin metinlerini alır
-    .flatMap { it.trim().split(" ") } // Boşluklara göre böler
-    .filter { it.isNotEmpty() } // Boş olanları temizler
+            .eachText() // Tüm <a> etiketlerinin metinlerini alır
+            .flatMap { it.trim().split(" ") } // Boşluklara göre böler
+            .filter { it.isNotEmpty() } // Boş olanları temizler
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
 
         return if (url.contains("/dizi/")) {
