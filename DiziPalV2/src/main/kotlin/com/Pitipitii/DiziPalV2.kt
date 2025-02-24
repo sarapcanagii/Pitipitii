@@ -122,7 +122,10 @@ class DiziPalV2 : MainAPI() {
         val document = app.get(url).document
 
         val poster = fixUrlNull(document.selectFirst("img")?.attr("src"))
-        val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
+        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
+          .text()
+          .trim()
+          .toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//div[text()='Türler']//following-sibling::div").text().trim().split(" ").mapNotNull { it.trim() }
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
