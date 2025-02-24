@@ -127,7 +127,10 @@ class DiziPalV2 : MainAPI() {
           .trim()
           .toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
-        val tags = document.selectXpath("//div[text()='Türler']//following-sibling::div").text().trim().split(" ").mapNotNull { it.trim() }
+        val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
+    .eachText() // Tüm <a> etiketlerinin metinlerini alır
+    .flatMap { it.trim().split(" ") } // Boşluklara göre böler
+    .filter { it.isNotEmpty() } // Boş olanları temizler
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
