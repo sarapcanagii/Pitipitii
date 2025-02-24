@@ -123,9 +123,16 @@ class DiziPalV2 : MainAPI() {
 
         val poster = fixUrlNull(document.selectFirst("img")?.attr("src"))
         val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
-          .text()
-          .trim()
-          .toIntOrNull()
+    .firstOrNull()  // Liste boşsa null döndürür
+    ?.text()        // null değilse metni alır
+    ?.trim()        // null değilse boşlukları temizler
+    ?.toIntOrNull() // null değilse integer'a çevirir
+
+if (year == null) {
+    println("Gösterim yılı bulunamadı veya geçersiz.")
+} else {
+    println("Gösterim yılı: $year")
+}
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
     .eachText() // Tüm <a> etiketlerinin metinlerini alır
