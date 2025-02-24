@@ -143,7 +143,7 @@ if (year == null) {
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
         return if (url.contains("/dizi/")) {
-            val title = document.selectFirst("div.cover h5")?.text() ?: return null
+            val title = document.selectFirst("div.absolute h1")?.text() ?: return null
 
             val episodes = document.select("div.episode-item").mapNotNull {
                 val epName = it.selectFirst("div.name")?.text()?.trim() ?: return@mapNotNull null
