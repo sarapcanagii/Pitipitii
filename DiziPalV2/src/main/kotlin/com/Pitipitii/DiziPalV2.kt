@@ -90,7 +90,7 @@ class DiziPalV2 : MainAPI() {
         return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
     }
 
-    private fun SearchItem.toPostSearchResult(): SearchResponse {
+  private fun SearchItem.toPostSearchResult(): SearchResponse {
         val title = this.title
         val href = "${mainUrl}${this.url}"
         val posterUrl = this.poster
@@ -121,28 +121,16 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
-        val divElement = document.selectFirst("div.w-full")
-        val poster = divElement?.selectFirst("img")?.attr("src")
-        val year = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Gösterim Yılı']]/div[@class='value']/text()")
-            .firstOrNull() // Liste boşsa null döndürür
-            ?.text()       // null değilse metni alır
-            ?.trim()       // null değilse boşlukları temizler
-            ?.toIntOrNull() // null değilse integer'a çevirir
 
-    if (year == null) {
-        println("Gösterim yılı bulunamadı veya geçersiz.")
-    } else {
-        println("Gösterim yılı: $year")
-    }
+        val poster = fixUrlNull(document.selectFirst("[property='og:image']")?.attr("content"))
+        val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
-        val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
-            .eachText() // Tüm <a> etiketlerinin metinlerini alır
-            .flatMap { it.trim().split(" ") } // Boşluklara göre böler
-            .filter { it.isNotEmpty() } // Boş olanları temizler
+        val tags = document.selectXpath("//div[text()='Türler']//following-sibling::div").text().trim().split(" ").mapNotNull { it.trim() }
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
+        val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
         return if (url.contains("/dizi/")) {
-            val title = document.selectFirst("div.absolute h1")?.text() ?: return null
+            val title = document.selectFirst("div.cover h5")?.text() ?: return null
 
             val episodes = document.select("div.episode-item").mapNotNull {
                 val epName = it.selectFirst("div.name")?.text()?.trim() ?: return@mapNotNull null
@@ -164,6 +152,7 @@ class DiziPalV2 : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 this.rating = rating
+                this.duration = duration
             }
         } else {
             val title = document.selectXpath("//div[@class='g-title'][2]/div").text().trim()
@@ -174,6 +163,7 @@ class DiziPalV2 : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 this.rating = rating
+                this.duration = duration
             }
         }
     }
