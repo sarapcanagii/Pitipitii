@@ -88,9 +88,9 @@ class DiziPalV2 : MainAPI() {
     }
 
     private fun Element.diziler(): SearchResponse? {
-        val title = this.selectFirst("span.title")?.text() ?: return null
+        val title = this.selectFirst("h2.text-white")?.text() ?: return null
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
 
         return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
     }
