@@ -71,7 +71,7 @@ class DiziPalV2 : MainAPI() {
     private suspend fun Element.sonBolumler(): SearchResponse? {
         val name = this.selectFirst("h2.text-white")?.text() ?: return null
         val episode = this.selectFirst("span.text-white.text-sm")?.text() ?: return null
-        val title = "$name $episode"
+        val title = "$name\n$episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
