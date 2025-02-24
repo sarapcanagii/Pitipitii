@@ -10,6 +10,7 @@ import com.lagradost.cloudstream3.network.CloudflareKiller
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 
 class DiziPalV2 : MainAPI() {
     override var mainUrl = "https://dizipal904.com"
@@ -120,8 +121,8 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
-
-        val poster = fixUrlNull(document.selectFirst("img")?.attr("src"))
+        val divElement = document.selectFirst("div.w-full")
+        val poster = divElement?.selectFirst("img")?.attr("src")
         val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
     .firstOrNull()  // Liste boşsa null döndürür
     ?.text()        // null değilse metni alır
