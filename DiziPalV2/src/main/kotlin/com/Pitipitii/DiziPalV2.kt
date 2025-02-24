@@ -122,7 +122,7 @@ class DiziPalV2 : MainAPI() {
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
 
-        val poster = fixUrlNull(document.selectFirst("img")?.attr("data-src"))
+        val poster = fixUrlNull(document.selectFirst("div#mPlayerFds img")?.attr("src"))
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a/text()").text().trim().split(" ").mapNotNull { it.trim() }
