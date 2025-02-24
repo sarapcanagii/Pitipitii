@@ -49,19 +49,12 @@ class DiziPalV2 : MainAPI() {
         "${mainUrl}/kanal/tabii" to "Tabii",
         "${mainUrl}/kanal/netflix" to "Netflix",
         "${mainUrl}/kanal/exxen" to "Exxen",
-        "${mainUrl}/kanal/blutv" to "BluTV",
         "${mainUrl}/kanal/disney" to "Disney+",
         "${mainUrl}/kanal/amazon" to "Amazon Prime",
         "${mainUrl}/kanal/tod" to "TOD (beIN)",
         "${mainUrl}/kanal/hulu" to "Hulu",
         "${mainUrl}/kanal/apple-tv" to "Apple TV+",
         "${mainUrl}/anime" to "Anime",
-        "${mainUrl}/diziler?kelime=&durum=&tur=5&type=&siralama=" to "Bilimkurgu Dizileri",
-        "${mainUrl}/tur/bilimkurgu" to "Bilimkurgu Filmleri",
-        "${mainUrl}/diziler?kelime=&durum=&tur=11&type=&siralama=" to "Komedi Dizileri",
-        "${mainUrl}/tur/komedi" to "Komedi Filmleri",
-        "${mainUrl}/diziler?kelime=&durum=&tur=4&type=&siralama=" to "Belgesel Dizileri",
-        "${mainUrl}/tur/belgesel" to "Belgesel Filmleri",
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
@@ -77,7 +70,7 @@ class DiziPalV2 : MainAPI() {
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
         val name = this.selectFirst("h2.text-white")?.text() ?: return null
-        val episode = this.selectFirst("h2.text-white")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val episode = this.selectFirst("span.text-white.text-sm::text")?.text() ?: return null
         val title = "$name $episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
