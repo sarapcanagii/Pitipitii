@@ -43,8 +43,8 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf(
-        "${mainUrl}/diziler/son-bolumler" to "Son Bölümler",
-        "${mainUrl}/diziler" to "Yeni Diziler",
+        "${mainUrl}/yabanci-dizi-izle" to "Son Bölümler",
+        "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
         "${mainUrl}/filmler" to "Yeni Filmler",
         "${mainUrl}/koleksiyon/netflix" to "Netflix",
         "${mainUrl}/koleksiyon/exxen" to "Exxen",
@@ -65,22 +65,22 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/diziler/son-bolumler")) {
-            document.select("div.episode-item").mapNotNull { it.sonBolumler() }
+        val home = if (request.data.contains("/yabanci-dizi-izle")) {
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.sonBolumler() }
         } else {
-            document.select("article.type2 ul li").mapNotNull { it.diziler() }
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
 
         return newHomePageResponse(request.name, home, hasNext = false)
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("div.name")?.text() ?: return null
-        val episode = this.selectFirst("div.episode")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val name = this.selectFirst("h2.text-white")?.text() ?: return null
+        val episode = this.selectFirst("h2.text-white")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
         val title = "$name $episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
 
         return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) {
             this.posterUrl = posterUrl
