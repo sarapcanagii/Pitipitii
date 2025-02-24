@@ -85,7 +85,7 @@ class DiziPalV2 : MainAPI() {
     private fun Element.diziler(): SearchResponse? {
         val title = this.selectFirst("h2.text-white")?.text() ?: return null
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
 
         return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
     }
@@ -122,7 +122,7 @@ class DiziPalV2 : MainAPI() {
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
 
-        val poster = fixUrlNull(document.selectFirst("[property='og:image']")?.attr("content"))
+        val poster = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a/text()").text().trim().split(" ").mapNotNull { it.trim() }
