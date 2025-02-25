@@ -44,7 +44,7 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf(
-        "${mainUrl}/yabanci-dizi-izle" to "Son Bölümler",
+        "${mainUrl}" to "Son Bölümler",
         "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
         "${mainUrl}/hd-film-izle" to "Yeni Filmler",
         "${mainUrl}/kanal/tabii" to "Tabii",
@@ -60,7 +60,7 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/yabanci-dizi-izle")) {
+        val home = if (request.data.contains("")) {
             document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4").mapNotNull { it.sonBolumler() }
         } else {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
