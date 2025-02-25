@@ -61,7 +61,7 @@ class DiziPalV2 : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
         val home = if (request.data.contains("/yabanci-dizi-izle")) {
-            document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4").mapNotNull { it.sonBolumler() }
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.sonBolumler() }
         } else {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
@@ -70,8 +70,8 @@ class DiziPalV2 : MainAPI() {
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? {
-        val name = this.selectFirst("div.text.block h2.text-white.text-sm.line-clamp-1.text-ellipsis.overflow-hidden.font-bold")?.text() ?: return null
-        val episode = this.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.replace(". Sezon ", "x")?.replace(". Bölüm", "") ?: return null
+        val name = this.selectFirst("h2.text-white")?.text() ?: return null
+        val episode = this.selectFirst("span.text-white.text-sm")?.text() ?: return null
         val title = "$name\n$episode"
 
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
