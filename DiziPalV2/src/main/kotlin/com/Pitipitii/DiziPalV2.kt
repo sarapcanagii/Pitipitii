@@ -128,7 +128,7 @@ class DiziPalV2 : MainAPI() {
         )// Poster URL
         // val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         
-        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]//div[@class='value']/text()")
+        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
     .text()
     .trim()
     .toIntOrNull()// Yapım yılı
