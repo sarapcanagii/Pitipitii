@@ -135,7 +135,7 @@ class DiziPalV2 : MainAPI() {
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt() // IMDB puanı
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull() // Süre
 
-        return if (url.contains("/dizi/")) { // Dizi kontrolü
+        return if (url.contains("/series/")) { // Dizi kontrolü
             val title = document.selectFirst("h2.text-white.text-sm")?.text() ?: return null // Başlık al
 
             val episodes = document.select("div.relative.w-full.flex.items-start").mapNotNull { // Bölümleri al
