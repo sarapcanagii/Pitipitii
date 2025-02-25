@@ -126,7 +126,12 @@ class DiziPalV2 : MainAPI() {
             document.selectFirst("div#mPlayerFds img")?.attr("src")
             ?: document.selectFirst("div.w-full.page-top.relative img")?.attr("src")
         )// Poster URL
-        val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull() // Yapım yılı
+        // val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
+        
+        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
+    .text()
+    .trim()
+    .toIntOrNull()// Yapım yılı
         val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
             .eachText() // Tüm <a> etiketlerinin metinlerini alır
