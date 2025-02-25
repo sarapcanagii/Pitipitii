@@ -122,8 +122,10 @@ class DiziPalV2 : MainAPI() {
     override suspend fun load(url: String): LoadResponse? { // İçerik yükleme
         val document = app.get(url).document // Döküman al
 
-        // val poster = fixUrlNull(document.selectFirst("div#mPlayerFds img")?.attr("src"))
-        val poster = fixUrlNull(document.selectFirst("div.w-full.page-top.relative img")?.attr("src"))// Poster URL
+        val poster = fixUrlNull(
+            document.selectFirst("div#mPlayerFds img")?.attr("src")
+            ?: document.selectFirst("div.w-full.page-top.relative img")?.attr("src")
+        )// Poster URL
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull() // Yapım yılı
         val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a/text()").text().trim().split(" ").mapNotNull { it.trim() } // Etiketler
