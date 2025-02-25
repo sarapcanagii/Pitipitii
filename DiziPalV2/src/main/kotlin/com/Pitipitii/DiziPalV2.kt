@@ -60,7 +60,7 @@ class DiziPalV2 : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("${mainUrl}")) {
+        val home = if (request.data.contains("/yabanci-dizi-izle")) {
             document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4").mapNotNull { it.sonBolumler() }
         } else {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
