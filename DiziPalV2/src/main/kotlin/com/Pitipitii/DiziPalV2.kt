@@ -139,7 +139,7 @@ class DiziPalV2 : MainAPI() {
             val title = document.selectFirst("h2.text-white.text-sm")?.text() ?: return null // Başlık al
 
             val episodes = document.select("div.relative.w-full.flex.items-start").mapNotNull { // Bölümleri al
-                val epName = it.selectFirst("h2.text-white.text-sm")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
+                val epName = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
                 val epHref = fixUrlNull(it.selectFirst("a.text.block")?.attr("href")) ?: return@mapNotNull null // Bölüm URL
                 val epEpisode = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(2)?.replace(".", "")?.toIntOrNull() // Bölüm numarası
                 val epSeason = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(0)?.replace(".", "")?.toIntOrNull() // Sezon numarası
