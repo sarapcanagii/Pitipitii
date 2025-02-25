@@ -44,7 +44,7 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf(
-        // "${mainUrl}" to "Son Bölümler",
+        "${mainUrl}/yabanci-dizi-izle" to "Son Bölümler",
         "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
         "${mainUrl}/hd-film-izle" to "Yeni Filmler",
         "${mainUrl}/kanal/tabii" to "Tabii",
