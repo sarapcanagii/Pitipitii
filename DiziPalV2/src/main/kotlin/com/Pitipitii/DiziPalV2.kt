@@ -128,7 +128,10 @@ class DiziPalV2 : MainAPI() {
         )// Poster URL
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull() // Yapım yılı
         val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
-        val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a/text()").text().trim().split(" ").mapNotNull { it.trim() } // Etiketler
+        val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
+            .eachText() // Tüm <a> etiketlerinin metinlerini alır
+            .flatMap { it.trim().split(" ") } // Boşluklara göre böler
+            .filter { it.isNotEmpty() } // Boş olanları temizler // Etiketler
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt() // IMDB puanı
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull() // Süre
 
