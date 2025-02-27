@@ -67,7 +67,7 @@ class TFlix : MainAPI() {
         val href = fixUrlNull(this.selectFirst("div.data h3 a")?.attr("href")) ?: return null // URL düzenleme
         val posterUrl = fixUrlNull(this.selectFirst("div.poster img")?.attr("src")) // Poster URL
 
-        return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) { // Arama yanıtı oluşturma
+        return newLiveSearchResponse(title, href.substringBefore("/sezon"), TvType.Live) { // Arama yanıtı oluşturma
             this.posterUrl = posterUrl
         }
     }
@@ -77,7 +77,7 @@ class TFlix : MainAPI() {
         val href = fixUrlNull(this.selectFirst("div.data h3 a")?.attr("href")) ?: return null // URL düzenleme
         val posterUrl = fixUrlNull(this.selectFirst("div.poster img")?.attr("src")) // Poster URL
 
-        return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl } // Arama yanıtı oluşturma
+        return newLiveSearchResponse(title, href, TvType.Live) { this.posterUrl = posterUrl } // Arama yanıtı oluşturma
     }
 
   private fun SearchItem.toPostSearchResult(): SearchResponse { // Arama sonuçlarını işleme
@@ -86,7 +86,7 @@ class TFlix : MainAPI() {
         val posterUrl = this.poster // Poster URL
 
         return if (this.type == "live") { // Tür kontrolü
-            newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
+            newLiveSearchResponse(title, href, TvType.Live) { this.posterUrl = posterUrl }
         } else {
             newMovieSearchResponse(title, href, TvType.Movie) { this.posterUrl = posterUrl }
         }
@@ -145,7 +145,7 @@ class TFlix : MainAPI() {
                 )
             }
 
-            newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) { // Dizi yükleme yanıtı
+            newLiveLoadResponse(title, url, TvType.Live, episodes) { // Dizi yükleme yanıtı
                 this.posterUrl = poster
                 this.year = year
                 this.plot = description
