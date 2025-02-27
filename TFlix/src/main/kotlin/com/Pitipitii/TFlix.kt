@@ -120,7 +120,7 @@ class TFlix : MainAPI() {
     .text()
     .trim()
     .toIntOrNull()// Yapım yılı
-        val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
+        val description = document.selectFirst("div.wp-content p")?.text()?.trim() // Açıklama
         val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
             .eachText() // Tüm <a> etiketlerinin metinlerini alır
             .flatMap { it.trim().split(" ") } // Boşluklara göre böler
@@ -128,14 +128,14 @@ class TFlix : MainAPI() {
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt() // IMDB puanı
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull() // Süre
 
-        return if (url.contains("/series/")) { // Dizi kontrolü
-            val title = document.selectFirst("h2.text-white.text-sm")?.text() ?: return null // Başlık al
+        return if (url.contains("/live/")) { // Dizi kontrolü
+            val title = document.selectFirst("div.options ul.ajax_mode li")?.text() ?: return null // Başlık al
 
             val episodes = document.select("div.relative.w-full.flex.items-start").mapNotNull { // Bölümleri al
-                val epName = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
+                val epName = it.selectFirst("span.title")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
                 val epHref = fixUrlNull(it.selectFirst("a.text.block")?.attr("href")) ?: return@mapNotNull null // Bölüm URL
-                val epEpisode = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(2)?.replace(".", "")?.toIntOrNull() // Bölüm numarası
-                val epSeason = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(0)?.replace(".", "")?.toIntOrNull() // Sezon numarası
+                val epEpisode = it.selectFirst("span.title")?.text()?.trim()?.split(" ")?.get(2)?.replace(".", "")?.toIntOrNull() // Bölüm numarası
+                val epSeason = it.selectFirst("span.title")?.text()?.trim()?.split(" ")?.get(0)?.replace(".", "")?.toIntOrNull() // Sezon numarası
 
                 Episode(
                     data = epHref,
