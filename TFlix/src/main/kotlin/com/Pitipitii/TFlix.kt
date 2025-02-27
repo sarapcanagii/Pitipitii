@@ -19,8 +19,8 @@ class TFlix : MainAPI() {
     override var lang = "tr" // Dil ayarı
     override val hasQuickSearch = true // Hızlı arama desteği
     override val hasChromecastSupport = true // Chromecast desteği
-    override val hasDownloadSupport = true // İndirme desteği
-    override val supportedTypes = setOf(TvType.TvSeries, TvType.Movie) // Desteklenen içerik türleri
+    override val hasDownloadSupport = false // İndirme desteği
+    override val supportedTypes = setOf(TvType.Live) // Desteklenen içerik türleri
 
     // CloudFlare bypass
     override var sequentialMainPage = true // Ana sayfa yükleme sıralaması
