@@ -62,7 +62,7 @@ class TFlix : MainAPI() {
     private suspend fun Element.sonBolumler(): SearchResponse? { // Son bölümleri işleme
         val name = this.selectFirst("div.data h3 a")?.text() ?: return null // Dizi adı
         // val episode = this.selectFirst("div.data h3 a")?.text() ?: return null // Bölüm bilgisi
-        val title = "$name\n$episode" // Başlık oluşturma
+        val title = "$name" // Başlık oluşturma
 
         val href = fixUrlNull(this.selectFirst("div.data h3 a")?.attr("href")) ?: return null // URL düzenleme
         val posterUrl = fixUrlNull(this.selectFirst("div.poster img")?.attr("src")) // Poster URL
