@@ -13,7 +13,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 class TFlix : MainAPI() {
-    override var mainUrl = "https://tflix.net" // Ana URL tanımı
+    override var mainUrl = "https://tv.tflix.app" // Ana URL tanımı
     override var name = "TFlix" // Uygulama adı
     override val hasMainPage = true // Ana sayfa desteği olup olmadığını belirtir
     override var lang = "tr" // Dil ayarı
