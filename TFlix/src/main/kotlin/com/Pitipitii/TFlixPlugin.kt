@@ -5,8 +5,8 @@ import com.lagradost.cloudstream3.plugins.Plugin
 import android.content.Context
 
 @CloudstreamPlugin
-class TFlixV2Plugin: Plugin() {
+class TFlixPlugin: Plugin() {
     override fun load(context: Context) {
-        registerMainAPI(TFlixV2())
+        registerMainAPI(TFlix())
     }
 }
