@@ -112,9 +112,7 @@ class TFlix : MainAPI() {
     override suspend fun load(url: String): LoadResponse? { // İçerik yükleme
         val document = app.get(url).document // Döküman al
 
-        val poster = fixUrlNull(
-            document.selectFirst("div#mPlayerFds img")?.attr("src")
-            ?: document.selectFirst("div.w-full.page-top.relative img")?.attr("src")
+        val poster = fixUrlNull(document.selectFirst("div.poster img")?.attr("src")
         )// Poster URL
         // val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         
