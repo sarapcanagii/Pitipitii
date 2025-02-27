@@ -20,26 +20,6 @@
         "name": "DiziPal"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=https://dizipal683.com&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 18420,
-        "status": 1,
-        "language": "tr",
-        "authors": [
-            "sarapcanagii"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
-        "version": 22,
-        "internalName": "DiziPalV2",
-        "description": "(TEST A\u015eAMASINDA) en yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
-        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPalV2.cs3",
-        "name": "DiziPalV2"
-    },
-    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
@@ -57,24 +37,5 @@
         "description": "TabiiSpor",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/Tabii.cs3",
         "name": "Tabii"
-    },
-    {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=https://tv.tflix.app&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 17823,
-        "status": 1,
-        "language": "tr",
-        "authors": [
-            "sarapcanagii"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
-        "version": 22,
-        "internalName": "TFlix",
-        "description": "(TEST A\u015eAMASINDA) Watch live sports on TFLIX, including English Premier League, LaLiga, Bundesliga, F1, and live cricket. Stream your favorite events MHDTV Sports &amp; DaddyLiveHD instantly!",
-        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/TFlix.cs3",
-        "name": "TFlix"
     }
 ]
