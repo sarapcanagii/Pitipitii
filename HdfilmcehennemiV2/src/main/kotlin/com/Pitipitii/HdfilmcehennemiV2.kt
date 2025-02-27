@@ -120,7 +120,7 @@ class HdfilmcehennemiV2 : MainAPI() {
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
-        return if (url.contains("/dizi/")) {
+        return if (url.contains("/film/")) {
             val title = document.selectFirst("div.cover h5")?.text() ?: return null
 
             val episodes = document.select("div.episode-item").mapNotNull {
