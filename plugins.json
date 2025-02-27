@@ -20,6 +20,26 @@
         "name": "DiziPal"
     },
     {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=https://hdfilmcehennemi10.org&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
+        "fileSize": 18074,
+        "status": 1,
+        "language": "tr",
+        "authors": [
+            "sarapcanagii"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 22,
+        "internalName": "HdfilmcehennemiV2",
+        "description": "HDFilmCehennemi, en yeni filmleri ve yabanc\u0131 dizileri HD kalitesinde izleyebilece\u011finiz \u00fccretsiz bir platformdur.",
+        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/HdfilmcehennemiV2.cs3",
+        "name": "HdfilmcehennemiV2"
+    },
+    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
