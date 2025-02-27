@@ -54,7 +54,7 @@ class HdfilmcehennemiV2 : MainAPI() {
         val home = if (request.data.contains("/tum-bolumler")) {
             document.select("div.episodes.episode div.list-episodes div.episode-box").mapNotNull { it.sonBolumler() }
         } else {
-            document.select("article.type2 ul li").mapNotNull { it.diziler() }
+            document.select("div.container-custom div.movie-item div.movie-box div.poster").mapNotNull { it.diziler() }
         }
 
         return newHomePageResponse(request.name, home, hasNext = false)
@@ -74,9 +74,9 @@ class HdfilmcehennemiV2 : MainAPI() {
     }
 
     private fun Element.diziler(): SearchResponse? {
-        val title = this.selectFirst("span.title")?.text() ?: return null
-        val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val title = this.selectFirst("div.film-ismi a")?.text() ?: return null
+        val href = fixUrlNull(this.selectFirst("div.film-ismi a")?.attr("href")) ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("div.poster a div.img img")?.attr("src"))
 
         return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
     }
