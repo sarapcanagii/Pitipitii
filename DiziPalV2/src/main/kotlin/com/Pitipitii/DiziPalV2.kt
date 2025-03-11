@@ -43,29 +43,22 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf(
-        "${mainUrl}/diziler/son-bolumler" to "Son Bölümler",
+        "${mainUrl}/dizi/son-bolumler" to "Son Bölümler",
         "${mainUrl}/diziler" to "Yeni Diziler",
-        "${mainUrl}/filmler" to "Yeni Filmler",
-        "${mainUrl}/koleksiyon/netflix" to "Netflix",
-        "${mainUrl}/koleksiyon/exxen" to "Exxen",
-        "${mainUrl}/koleksiyon/blutv" to "BluTV",
-        "${mainUrl}/koleksiyon/disney" to "Disney+",
-        "${mainUrl}/koleksiyon/amazon-prime" to "Amazon Prime",
-        "${mainUrl}/koleksiyon/tod-bein" to "TOD (beIN)",
-        "${mainUrl}/koleksiyon/gain" to "Gain",
-        "${mainUrl}/tur/mubi" to "Mubi",
-        "${mainUrl}/diziler?kelime=&durum=&tur=26&type=&siralama=" to "Anime",
-        "${mainUrl}/diziler?kelime=&durum=&tur=5&type=&siralama=" to "Bilimkurgu Dizileri",
+        "${mainUrl}/film" to "Yeni Filmler",
+        "${mainUrl}/tur/animeler" to "Anime",
+        "${mainUrl}/tur/bilim-kurgu-filmleri" to "Bilimkurgu Filmleri",
+        "${mainUrl}/tur/bilim-kurgu-fantazi" to "Bilimkurgu Dizileri",
         "${mainUrl}/tur/bilimkurgu" to "Bilimkurgu Filmleri",
-        "${mainUrl}/diziler?kelime=&durum=&tur=11&type=&siralama=" to "Komedi Dizileri",
-        "${mainUrl}/tur/komedi" to "Komedi Filmleri",
-        "${mainUrl}/diziler?kelime=&durum=&tur=4&type=&siralama=" to "Belgesel Dizileri",
-        "${mainUrl}/tur/belgesel" to "Belgesel Filmleri",
+        "${mainUrl}/tur/komedi" to "Komedi Dizileri",
+        "${mainUrl}/tur/komedi-filmleri" to "Komedi Filmleri",
+        "${mainUrl}/tur/belgesel" to "Belgesel Dizileri",
+        "${mainUrl}/tur/belgesel-filmleri" to "Belgesel Filmleri",
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
-        val home = if (request.data.contains("/diziler/son-bolumler")) {
+        val home = if (request.data.contains("/dizi/son-bolumler")) {
             document.select("div.episode-item").mapNotNull { it.sonBolumler() }
         } else {
             document.select("article.type2 ul li").mapNotNull { it.diziler() }
