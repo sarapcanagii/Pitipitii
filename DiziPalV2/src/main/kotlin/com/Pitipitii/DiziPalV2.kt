@@ -49,7 +49,6 @@ class DiziPalV2 : MainAPI() {
         "${mainUrl}/tur/animeler" to "Anime",
         "${mainUrl}/tur/bilim-kurgu-filmleri" to "Bilimkurgu Filmleri",
         "${mainUrl}/tur/bilim-kurgu-fantazi" to "Bilimkurgu Dizileri",
-        "${mainUrl}/tur/bilimkurgu" to "Bilimkurgu Filmleri",
         "${mainUrl}/tur/komedi" to "Komedi Dizileri",
         "${mainUrl}/tur/komedi-filmleri" to "Komedi Filmleri",
         "${mainUrl}/tur/belgesel" to "Belgesel Dizileri",
@@ -127,7 +126,7 @@ class DiziPalV2 : MainAPI() {
         val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt()
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
-        return if (url.contains("/diziler/")) {
+        return if (url.contains("/diziler")) {
             val title = document.selectFirst("div.cover h5")?.text() ?: return null
 
             val episodes = document.select("div.episode-item").mapNotNull {
