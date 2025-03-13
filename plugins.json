@@ -20,26 +20,6 @@
         "name": "DiziPal"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=https://dizipal34.com&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 18186,
-        "status": 1,
-        "language": "tr",
-        "authors": [
-            "sarapcanagii"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
-        "version": 22,
-        "internalName": "DiziPalV2",
-        "description": "en yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
-        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPalV2.cs3",
-        "name": "DiziPalV2"
-    },
-    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
