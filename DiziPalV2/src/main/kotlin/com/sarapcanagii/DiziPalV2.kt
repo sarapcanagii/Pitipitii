@@ -116,7 +116,7 @@ class DiziPalV2 : MainAPI() {
         val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null // URL düzenleme
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src")) // Poster URL
 
-        return newTvSeriesSearchResponse(title, href.substringBefore("/sezon"), TvType.TvSeries) { // Arama yanıtı oluşturma
+        return newTvSeriesSearchResponse(title, href.substringBefore("/series"), TvType.TvSeries) { // Arama yanıtı oluşturma
             this.posterUrl = posterUrl
         }
     }
