@@ -42,7 +42,7 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf( // Ana sayfa içerik tanımları
-        "${mainUrl}" to "Son Bölümler",
+        "${mainUrl}"                   to "Son Bölümler",
         "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
         "${mainUrl}/hd-film-izle"      to "Yeni Filmler",
         "${mainUrl}/kanal/tabii"       to "Tabii",
@@ -67,6 +67,9 @@ class DiziPalV2 : MainAPI() {
         request.data.contains("${mainUrl}/hd-film-izle") -> { // Yeni Filmler
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
+        request.data.contains("${mainUrl}/kanal/tabii") -> { // Tabii
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
         request.data.contains("${mainUrl}/kanal/netflix") -> { // Netflix
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
@@ -74,6 +77,21 @@ class DiziPalV2 : MainAPI() {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
         request.data.contains("${mainUrl}/kanal/disney") -> { // Disney+
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/amazon") -> { // Amazon Prime
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/tod") -> { // TOD (beIN)
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/hulu") -> { // Hulu
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/apple-tv") -> { // Apple TV+
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/anime") -> { // Anime
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
         // Diğer tüm kategoriler için aynı şekilde diziler() fonksiyonunu kullanabilirsin.
