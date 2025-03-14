@@ -129,126 +129,116 @@ class DiziPalV2 : MainAPI() {
         return newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl } // Arama yanıtı oluşturma
     }
 
-  private fun SearchItem.toPostSearchResult(): SearchResponse { // Arama sonuçlarını işleme
-        val title = this.title // Başlık al
-        val href = "${mainUrl}${this.url}" // URL oluştur
-        val posterUrl = this.poster // Poster URL
+  private fun SearchItem.toPostSearchResult(): SearchResponse { 
+    val title = this.title // Başlık al
+    val href = "${mainUrl}${this.url}" // URL oluştur
+    val posterUrl = this.poster // Poster URL
 
-        return if (this.type == "series") { // Tür kontrolü
-            newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
-        } else {
-            newMovieSearchResponse(title, href, TvType.Movie) { this.posterUrl = posterUrl }
-        }
+    return if (this.type == "series") { // Tür kontrolü
+        newTvSeriesSearchResponse(title, href, TvType.TvSeries) { this.posterUrl = posterUrl }
+    } else {
+        newMovieSearchResponse(title, href, TvType.Movie) { this.posterUrl = posterUrl }
     }
+  }
 
     override suspend fun search(query: String): List<SearchResponse> { // Arama işlemi
-        val responseRaw = app.post( // Arama isteği gönder
-            "${mainUrl}/api/search-autocomplete",
-            headers = mapOf(
-                "Accept" to "application/json, text/javascript, */*; q=0.01",
-                "X-Requested-With" to "XMLHttpRequest"
-            ),
-            referer = "${mainUrl}/",
-            data = mapOf("query" to query)
-        )
+    val responseRaw = app.post( // Arama isteği gönder
+        "${mainUrl}/api/search-autocomplete",
+        headers = mapOf(
+            "Accept" to "application/json, text/javascript, */*; q=0.01",
+            "X-Requested-With" to "XMLHttpRequest"
+        ),
+        referer = "${mainUrl}/",
+        data = mapOf("query" to query)
+    )
 
-        val searchItemsMap = jacksonObjectMapper().readValue<Map<String, SearchItem>>(responseRaw.text) // Yanıtı işle
-        return searchItemsMap.values.map { it.toPostSearchResult() } // Arama sonuçlarını döndür
+    val searchItemsMap = jacksonObjectMapper().readValue<Map<String, SearchItem>>(responseRaw.text) // Yanıtı işle
+    return searchItemsMap.values.map { it.toPostSearchResult() } // Arama sonuçlarını döndür
     }
 
     override suspend fun quickSearch(query: String): List<SearchResponse> = search(query) // Hızlı arama
 
-    override suspend fun load(url: String): LoadResponse? { // İçerik yükleme
-        val document = app.get(url).document // Döküman al
+    override suspend fun load(url: String): LoadResponse? { 
+    val document = app.get(url).document // Döküman al
 
-        val poster = fixUrlNull(
-            document.selectFirst("div#mPlayerFds img")?.attr("src")
-            ?: document.selectFirst("div.w-full.page-top.relative img")?.attr("src")
-        )// Poster URL
-        // val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
-        
-        val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
-    .text()
-    .trim()
-    .toIntOrNull()// Yapım yılı
-        val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
-        val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
-            .eachText() // Tüm <a> etiketlerinin metinlerini alır
-            .flatMap { it.trim().split(" ") } // Boşluklara göre böler
-            .filter { it.isNotEmpty() } // Boş olanları temizler // Etiketler
-        val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt() // IMDB puanı
-        val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull() // Süre
+    val poster = fixUrlNull(
+        document.selectFirst("div#mPlayerFds img")?.attr("src")
+        ?: document.selectFirst("div.w-full.page-top.relative img")?.attr("src")
+    )// Poster URL
+    
+    val year = document.selectXpath("//li[div[@class='key' and text()='Gösterim Yılı']]/div[@class='value']/text()")
+        .text()
+        .trim()
+        .toIntOrNull() // Yapım yılı
+    
+    val description = document.selectFirst("div.summary p")?.text()?.trim() // Açıklama
+    val tags = document.selectXpath("//li[div[@class='key' and normalize-space(text())='Kategoriler']]//div[@class='value']/a")
+        .eachText() // Etiketler
+        .flatMap { it.trim().split(" ") } // Boşluklara göre böler
+        .filter { it.isNotEmpty() } // Boş olanları temizler
+    
+    val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim().toRatingInt() // IMDB puanı
+    val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull() // Süre
 
-        return if (url.contains("/series/")) { // Dizi kontrolü
-            val title = document.selectFirst("h2.text-white.text-sm")?.text() ?: return null // Başlık al
+    return if (url.contains("/series/")) { // Dizi kontrolü
+        val title = document.selectFirst("h2.text-white.text-sm")?.text() ?: return null // Başlık al
 
-            val episodes = document.select("div.relative.w-full.flex.items-start").mapNotNull { // Bölümleri al
-                val epName = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
-                val epHref = fixUrlNull(it.selectFirst("a.text.block")?.attr("href")) ?: return@mapNotNull null // Bölüm URL
-                val epEpisode = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(2)?.replace(".", "")?.toIntOrNull() // Bölüm numarası
-                val epSeason = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(0)?.replace(".", "")?.toIntOrNull() // Sezon numarası
+        val episodes = document.select("div.relative.w-full.flex.items-start").mapNotNull { // Bölümleri al
+            val epName = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim() ?: return@mapNotNull null // Bölüm adı
+            val epHref = fixUrlNull(it.selectFirst("a.text.block")?.attr("href")) ?: return@mapNotNull null // Bölüm URL
+            val epEpisode = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(2)?.replace(".", "")?.toIntOrNull() // Bölüm numarası
+            val epSeason = it.selectFirst("div.text-white.text-sm.opacity-80.font-light")?.text()?.trim()?.split(" ")?.get(0)?.replace(".", "")?.toIntOrNull() // Sezon numarası
 
-                Episode(
-                    data = epHref,
-                    name = epName,
-                    season = epSeason,
-                    episode = epEpisode
-                )
-            }
-
-            newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) { // Dizi yükleme yanıtı
-                this.posterUrl = poster
-                this.year = year
-                this.plot = description
-                this.tags = tags
-                this.rating = rating
-                this.duration = duration
-            }
-        } else {
-            val title = document.selectXpath("//div[@class='g-title'][2]/div").text().trim() // Başlık al
-
-            newMovieLoadResponse(title, url, TvType.Movie, url) { // Film yükleme yanıtı
-                this.posterUrl = poster
-                this.year = year
-                this.plot = description
-                this.tags = tags
-                this.rating = rating
-                this.duration = duration
-            }
+            Episode(
+                data = epHref,
+                name = epName,
+                season = epSeason,
+                episode = epEpisode
+            )
         }
+
+        newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) { // Dizi yükleme yanıtı
+            this.posterUrl = poster
+            this.year = year
+            this.plot = description
+            this.tags = tags
+            this.rating = rating
+            this.duration = duration
+        }
+    } else { // Film yükleme
+        val title = document.selectXpath("//div[@class='g-title'][2]/div").text().trim() // Başlık al
+
+        newMovieLoadResponse(title, url, TvType.Movie, url) { // Film yükleme yanıtı
+            this.posterUrl = poster
+            this.year = year
+            this.plot = description
+            this.tags = tags
+            this.rating = rating
+            this.duration = duration
+        }
+      }
     }
 
-    override suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean { // Linkleri yükleme
-        Log.d("DZP", "data » $data") // Debug log
-        val document = app.get(data).document // Döküman al
-        val iframe = document.selectFirst(".series-player-container iframe")?.attr("src")
-            ?: document.selectFirst("div#vast_new iframe")?.attr("src") ?: return false // iFrame kontrolü
-        Log.d("DZP", "iframe » $iframe") // Debug log
+    override suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean { 
+    Log.d("DZP", "data » $data") // Debug log
+    val document = app.get(data).document // Döküman al
+    val iframe = document.selectFirst(".series-player-container iframe")?.attr("src")
+        ?: document.selectFirst("div#vast_new iframe")?.attr("src") ?: return false // iFrame kontrolü
+    Log.d("DZP", "iframe » $iframe") // Debug log
 
-        val iSource = app.get(iframe, referer = "$mainUrl/").text // iFrame kaynağını al
-        val m3uLink = Regex("""file:\"([^\"]+)""").find(iSource)?.groupValues?.get(1) // m3u8 linki ayıkla
-        if (m3uLink == null) {
-            Log.d("DZP", "iSource » $iSource") // Debug log
-            return loadExtractor(iframe, "$mainUrl/", subtitleCallback, callback) // Extractor yükle
-        }
+    val iSource = app.get(iframe, referer = "$mainUrl/").text // iFrame kaynağını al
+    val m3uLink = Regex("""file:\"([^\"]+)""").find(iSource)?.groupValues?.get(1) // m3u8 linki ayıkla
+    if (m3uLink == null) {
+        Log.d("DZP", "iSource » $iSource") // Debug log
+        return loadExtractor(iframe, "$mainUrl/", subtitleCallback, callback) // Extractor yükle
+    }
 
-        val subtitles = Regex("""\"subtitle":\"([^\"]+)""").find(iSource)?.groupValues?.get(1) // Altyazıları ayıkla
-        subtitles?.let {
-            if (it.contains(",")) {
-                it.split(",").forEach { sub ->
-                    val subLang = sub.substringAfter("[").substringBefore("]")
-                    val subUrl = sub.replace("[$subLang]", "")
-
-                    subtitleCallback(
-                        SubtitleFile(
-                            lang = subLang,
-                            url = fixUrl(subUrl)
-                        )
-                    )
-                }
-            } else {
-                val subLang = it.substringAfter("[").substringBefore("]")
-                val subUrl = it.replace("[$subLang]", "")
+    val subtitles = Regex("""\"subtitle":\"([^\"]+)""").find(iSource)?.groupValues?.get(1) // Altyazıları ayıkla
+    subtitles?.let {
+        if (it.contains(",")) {
+            it.split(",").forEach { sub ->
+                val subLang = sub.substringAfter("[").substringBefore("]")
+                val subUrl = sub.replace("[$subLang]", "")
 
                 subtitleCallback(
                     SubtitleFile(
@@ -257,19 +247,29 @@ class DiziPalV2 : MainAPI() {
                     )
                 )
             }
-        }
+        } else {
+            val subLang = it.substringAfter("[").substringBefore("]")
+            val subUrl = it.replace("[$subLang]", "")
 
-        callback(
-            ExtractorLink(
-                source = this.name,
-                name = this.name,
-                url = m3uLink,
-                referer = "$mainUrl/",
-                quality = Qualities.Unknown.value,
-                isM3u8 = true
+            subtitleCallback(
+                SubtitleFile(
+                    lang = subLang,
+                    url = fixUrl(subUrl)
+                )
             )
-        )
-
-        return true // Başarıyla link yüklendi
+        }
     }
+
+    callback(
+        ExtractorLink(
+            source = this.name,
+            name = this.name,
+            url = m3uLink,
+            referer = "$mainUrl/",
+            quality = Qualities.Unknown.value,
+            isM3u8 = true
+        )
+    )
+
+    return true // Başarıyla link yüklendi
 }
