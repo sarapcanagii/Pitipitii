@@ -4,8 +4,13 @@ import android.util.Log
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
-import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
-import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.lagradost.cloudstream3.network.CloudflareKiller
+import okhttp3.Interceptor
+import okhttp3.Response
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 
 class DiziPalV2 : MainAPI() {
     override var mainUrl              = "https://dizipal908.com"
