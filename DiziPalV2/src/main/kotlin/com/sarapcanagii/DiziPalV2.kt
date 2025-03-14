@@ -57,17 +57,38 @@ class DiziPalV2 : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get(request.data).document
-        val home = if (request.data.contains("${mainUrl}")) {
-            document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4")
-            .mapNotNull { it.sonBolumler() }
-            .take(18)
-        } else {
+    val document = app.get(request.data).document
+
+    // URL'ye göre hangi veri tipini çekeceğimizi belirleyelim
+    val home = when {
+        request.data.contains("${mainUrl}/yabanci-dizi-izle") -> { // Yeni Diziler
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
-
-        return newHomePageResponse(request.name, home, hasNext = false)
+        request.data.contains("${mainUrl}/hd-film-izle") -> { // Yeni Filmler
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/netflix") -> { // Netflix
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/exxen") -> { // Exxen
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        request.data.contains("${mainUrl}/kanal/disney") -> { // Disney+
+            document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
+        }
+        // Diğer tüm kategoriler için aynı şekilde diziler() fonksiyonunu kullanabilirsin.
+        request.data.contains("${mainUrl}") -> { // Son Bölümler
+            document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4")
+                .mapNotNull { it.sonBolumler() }
+                .take(18)
+        }
+        else -> { // Varsayılan olarak boş döndürüyoruz
+            emptyList()
+        }
     }
+
+    return newHomePageResponse(request.name, home, hasNext = false)
+}
 
     private suspend fun Element.sonBolumler(): SearchResponse? { // Son bölümleri işleme
         val name = this.selectFirst("div.text.block h2.text-white.text-sm.line-clamp-1.text-ellipsis.overflow-hidden.font-bold")?.text() ?: return null // Dizi adı
