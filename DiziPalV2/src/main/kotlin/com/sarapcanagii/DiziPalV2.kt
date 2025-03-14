@@ -42,29 +42,29 @@ class DiziPalV2 : MainAPI() {
     }
 
     override val mainPage = mainPageOf( // Ana sayfa içerik tanımları
-        "${mainUrl}/yabanci-dizi-izle" to "Son Bölümler",
+        "${mainUrl}/" to "Son Bölümler",
         "${mainUrl}/yabanci-dizi-izle" to "Yeni Diziler",
-        "${mainUrl}/hd-film-izle" to "Yeni Filmler",
-        "${mainUrl}/kanal/tabii" to "Tabii",
-        "${mainUrl}/kanal/netflix" to "Netflix",
-        "${mainUrl}/kanal/exxen" to "Exxen",
-        "${mainUrl}/kanal/disney" to "Disney+",
-        "${mainUrl}/kanal/amazon" to "Amazon Prime",
-        "${mainUrl}/kanal/tod" to "TOD (beIN)",
-        "${mainUrl}/kanal/hulu" to "Hulu",
-        "${mainUrl}/kanal/apple-tv" to "Apple TV+",
-        "${mainUrl}/anime" to "Anime",
+        "${mainUrl}/hd-film-izle"      to "Yeni Filmler",
+        "${mainUrl}/kanal/tabii"       to "Tabii",
+        "${mainUrl}/kanal/netflix"     to "Netflix",
+        "${mainUrl}/kanal/exxen"       to "Exxen",
+        "${mainUrl}/kanal/disney"      to "Disney+",
+        "${mainUrl}/kanal/amazon"      to "Amazon Prime",
+        "${mainUrl}/kanal/tod"         to "TOD (beIN)",
+        "${mainUrl}/kanal/hulu"        to "Hulu",
+        "${mainUrl}/kanal/apple-tv"    to "Apple TV+",
+        "${mainUrl}/anime"             to "Anime",
     )
 
-    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse { // Ana sayfa verilerini al
-        val document = app.get(request.data).document // İstekten dökümanı al
-        val home = if (request.data.contains("/yabanci-dizi-izle")) { // Yabancı dizileri kontrol et
+    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
+        val document = app.get(request.data).document
+        val home = if (request.data.contains("${mainUrl}")) {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.sonBolumler() }
         } else {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
 
-        return newHomePageResponse(request.name, home, hasNext = false) // Ana sayfa yanıtını oluştur
+        return newHomePageResponse(request.name, home, hasNext = false)
     }
 
     private suspend fun Element.sonBolumler(): SearchResponse? { // Son bölümleri işleme
