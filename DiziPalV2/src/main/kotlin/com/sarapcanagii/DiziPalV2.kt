@@ -59,7 +59,9 @@ class DiziPalV2 : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data).document
         val home = if (request.data.contains("${mainUrl}")) {
-            document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4").mapNotNull { it.sonBolumler() }
+            document.select("a.relative.w-full.rounded-lg.flex.items-center.gap-4")
+            .mapNotNull { it.sonBolumler() }
+            .take(18)
         } else {
             document.select("div.p-1.rounded-md.prm-borderb").mapNotNull { it.diziler() }
         }
