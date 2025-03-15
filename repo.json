@@ -1,6 +1,6 @@
 {
-    "name": "DiziPal & TabiiSpor | sarapcanagii",
-    "description": "DiziPal içerikleri ve TabiiSpor",
+    "name": "DiziPal & NeonSpor | sarapcanagii",
+    "description": "DiziPal içerikleri ve NeonSpor",
     "manifestVersion": 1,
     "pluginLists": [
       "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/plugins.json"
