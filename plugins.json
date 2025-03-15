@@ -57,5 +57,24 @@
         "description": "TabiiSpor",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/Tabii.cs3",
         "name": "Tabii"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=www.vavoo.to&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
+        "fileSize": 17211,
+        "status": 1,
+        "language": "tr",
+        "authors": [
+            "sarapcanagii"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 4,
+        "internalName": "VavooSpor",
+        "description": "VavooSpor",
+        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/VavooSpor.cs3",
+        "name": "VavooSpor"
     }
 ]
