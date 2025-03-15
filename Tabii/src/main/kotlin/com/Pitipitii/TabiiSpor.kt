@@ -10,7 +10,7 @@ import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import java.io.InputStream
 
 class TabiiSpor : MainAPI() {
-    override var mainUrl              = "https://github.com/sarapcanagii/Pitipitii/raw/refs/heads/master/Tabii/TabiiSpor.m3u"
+    override var mainUrl              = "https://00m3u.rf.gd/bayir/TabiiSpor.m3u"
     override var name                 = "TabiiSpor"
     override val hasMainPage          = true
     override var lang                 = "tr"
