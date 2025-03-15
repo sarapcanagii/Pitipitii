@@ -40,10 +40,10 @@
         "name": "DiziPalV2"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%",
+        "iconUrl": "https://www.google.com/s2/favicons?domain=colorhunt.co&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 17201,
+        "fileSize": 17192,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -53,9 +53,9 @@
             "Live"
         ],
         "version": 4,
-        "internalName": "Tabii",
-        "description": "TabiiSpor",
-        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/Tabii.cs3",
-        "name": "Tabii"
+        "internalName": "NeonSpor",
+        "description": "NeonSpor eklentisini de BeIN Spor, Tabii Spor ve S Spor kanallar\u0131 mevcuttur.",
+        "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
+        "name": "NeonSpor"
     }
 ]
