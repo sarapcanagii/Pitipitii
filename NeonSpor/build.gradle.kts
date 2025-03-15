@@ -3,7 +3,7 @@ version = 4
 cloudstream {
     authors     = listOf("sarapcanagii")
     language    = "tr"
-    description = "TabiiSpor"
+    description = "NeonSpor eklentisini de BeIN Spor, Tabii Spor ve S Spor kanalları mevcuttur."
 
     /**
      * Status int as the following:
@@ -14,5 +14,5 @@ cloudstream {
     **/
     status  = 1 // will be 3 if unspecified
     tvTypes = listOf("Live")
-    iconUrl = "https://www.google.com/s2/favicons?domain=www.tabii.com&sz=%size%"
+    iconUrl = "https://www.google.com/s2/favicons?domain=colorhunt.co&sz=%size%"
 }

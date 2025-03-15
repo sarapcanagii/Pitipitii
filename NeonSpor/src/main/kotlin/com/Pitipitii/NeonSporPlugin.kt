@@ -5,8 +5,8 @@ import com.lagradost.cloudstream3.plugins.Plugin
 import android.content.Context
 
 @CloudstreamPlugin
-class TabiiSporPlugin: Plugin() {
+class NeonSporPlugin: Plugin() {
     override fun load(context: Context) {
-        registerMainAPI(TabiiSpor())
+        registerMainAPI(NeonSpor())
     }
 }

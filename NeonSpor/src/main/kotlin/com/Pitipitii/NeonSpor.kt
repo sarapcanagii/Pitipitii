@@ -9,9 +9,9 @@ import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import java.io.InputStream
 
-class TabiiSpor : MainAPI() {
-    override var mainUrl              = "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/refs/heads/master/Tabii/TabiiSpor.m3u"
-    override var name                 = "TabiiSpor"
+class NeonSpor : MainAPI() {
+    override var mainUrl              = "https://00m3u.rf.gd/bayir/NeonSpor.m3u8"
+    override var name                 = "NeonSpor"
     override val hasMainPage          = true
     override var lang                 = "tr"
     override val hasQuickSearch       = true
@@ -35,7 +35,7 @@ class TabiiSpor : MainAPI() {
                     LiveSearchResponse(
                         name      = channelname,
                         url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                        apiName   = this@TabiiSpor.name,
+                        apiName   = this@NeonSpor.name,
                         type      = TvType.Live,
                         posterUrl = posterurl,
                         lang      = nation
@@ -61,7 +61,7 @@ class TabiiSpor : MainAPI() {
             LiveSearchResponse(
                 name      = channelname,
                 url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                apiName   = this@TabiiSpor.name,
+                apiName   = this@NeonSpor.name,
                 type      = TvType.Live,
                 posterUrl = posterurl,
                 lang      = nation
@@ -97,7 +97,7 @@ class TabiiSpor : MainAPI() {
                 recommendations.add(LiveSearchResponse(
                     name      = rcChannelName,
                     url       = LoadData(rcStreamUrl, rcChannelName, rcPosterUrl, rcChGroup, rcNation).toJson(),
-                    apiName   = this@TabiiSpor.name,
+                    apiName   = this@NeonSpor.name,
                     type      = TvType.Live,
                     posterUrl = rcPosterUrl,
                     lang      = rcNation,
