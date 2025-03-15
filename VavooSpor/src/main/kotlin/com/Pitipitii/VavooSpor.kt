@@ -35,7 +35,7 @@ class VavooSpor : MainAPI() {
                     LiveSearchResponse(
                         name      = channelname,
                         url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                        apiName   = this@TabiiSpor.name,
+                        apiName   = this@VavooSpor.name,
                         type      = TvType.Live,
                         posterUrl = posterurl,
                         lang      = nation
@@ -61,7 +61,7 @@ class VavooSpor : MainAPI() {
             LiveSearchResponse(
                 name      = channelname,
                 url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                apiName   = this@TabiiSpor.name,
+                apiName   = this@VavooSpor.name,
                 type      = TvType.Live,
                 posterUrl = posterurl,
                 lang      = nation
@@ -97,7 +97,7 @@ class VavooSpor : MainAPI() {
                 recommendations.add(LiveSearchResponse(
                     name      = rcChannelName,
                     url       = LoadData(rcStreamUrl, rcChannelName, rcPosterUrl, rcChGroup, rcNation).toJson(),
-                    apiName   = this@TabiiSpor.name,
+                    apiName   = this@VavooSpor.name,
                     type      = TvType.Live,
                     posterUrl = rcPosterUrl,
                     lang      = rcNation,
