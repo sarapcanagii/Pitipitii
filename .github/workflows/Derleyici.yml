@@ -19,6 +19,7 @@ on:
       - "**/*.png"
       - "**/*.py"
       - "**/*.m3u"
+      - "**/*.m3u8"
 jobs:
   CloudStreamDerleyici:
     runs-on: ubuntu-latest
