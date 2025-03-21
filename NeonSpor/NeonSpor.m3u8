@@ -41,14 +41,34 @@ https://z3mmimwz148csv0vaxtphqspf.medya.trt.com.tr/master_1080p.m3u8
 https://vbtob9hyq58eiophct5qctxr2.medya.trt.com.tr/master_1080p.m3u8
 
 #EXTINF:-1 tvg-id="ssport" tvg-name="S Sport" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/pr7mrf6.png" group-title="S-Sports",S Sport 1
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
-#EXTVLCOPT:http-referrer=https://monotv522.com/
-https://yes2mi.mevzuhls21.cfd/yayinss.m3u8
+https://bcovlive-a.akamaihd.net/540fcb034b144b848e7ff887f61a293a/eu-central-1/6415845530001/profile_0/chunklist.m3u8
 
 #EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/l8g5zml.png" group-title="S-Sports",S Sport 2
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
-#EXTVLCOPT:http-referrer=https://monotv522.com/
-https://yes2mi.mevzuhls21.cfd/yayinss2.m3u8
+https://bcovlive-a.akamaihd.net/29c60f23ea4840ba8726925a77fcfd0b/eu-central-1/6415845530001/profile_0/chunklist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 1" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 1
+https://liveexxen.akamaized.net/fe1c4a0174f5439a91769ba935a1c963/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 2
+https://liveexxen.akamaized.net/126009977a734520bb8b95169e4629d5/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 3" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 3
+https://liveexxen.akamaized.net/b620a434148142a6a06cf1b8e455bc56/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 4" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 4
+https://liveexxen.akamaized.net/123fd5eb3a27451ea2156ee9a86ce06c/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 5" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 5
+https://liveexxen.akamaized.net/2c5b60973fd5462b96a3ccc857894faa/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 6" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 6
+https://liveexxen.akamaized.net/5910a56c4da2424baad4380d1dcdd8de/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 7" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 7
+https://liveexxen.akamaized.net/b07fcc1db2a94487ab2d22582f31b626/eu-central-1/6415845530001/playlist.m3u8
+
+#EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 8" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 8
+https://liveexxen.akamaized.net/16fc8c683b034525b1706f75439f14fb/eu-central-1/6415845530001/playlist.m3u8
 
 #EXTINF:-1 tvg-name="TRT 1" tvg-language="Turkish" tvg-country="TR" tvg-id="Trt1" tvg-logo="https://cms-rotf-api.tabii.com/r/int/w500/23846_1-0-465-262.jpeg" group-title="Diğerleri", TRT 1
 https://tv-trt1.medya.trt.com.tr/master_1080.m3u8
