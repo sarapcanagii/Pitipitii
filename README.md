@@ -1,6 +1,6 @@
 ## ÇOK ÖNEMLİ!
 
-Eklentilerden biri çalışmıyorsa, önce çalışmayan eklentiyi silin. Ardından uygulamadan çıkıp tekrar giriş yaparak eklentiyi yeniden yükleyin.
+**Eklentilerden biri çalışmıyorsa, önce çalışmayan eklentiyi silin. Ardından uygulamadan çıkıp tekrar giriş yaparak eklentiyi yeniden yükleyin.**
 
 ## EKLENTİYİ LİNK İLE YÜKLE!
 
