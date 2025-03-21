@@ -34,7 +34,7 @@
         ],
         "version": 4,
         "internalName": "NeonSpor",
-        "description": "(Tabii Spor Hari\u00e7 Di\u011ferleri i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Spor, Tabii Spor ve S Spor kanallar\u0131 mevcuttur.",
+        "description": "(BeIN Spor i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Spor, Tabii Spor, S Spor, Exxen Spor ve Di\u011fer kanallar mevcuttur.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
         "name": "NeonSpor"
     }
