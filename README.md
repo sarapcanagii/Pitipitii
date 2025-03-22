@@ -6,7 +6,7 @@
 
 **Uygulamanın yüklü olduğu cihazda** _[depoyu otomatik yüklemek için tıklayın](https://keyiflerolsun.me/http-protocol-redirector?r=cloudstreamrepo://raw.githubusercontent.com/sarapcanagii/Pitipitii/master/repo.json)_
 
-## Spor ve Diğer Kanalların Kaliteleri
+## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
 | BeIN Sport | Tabii Spor| S Sport| Exxen Spor| Diğer|
 | :-------- | :---------- | :---- | :-------- | :-------- 
