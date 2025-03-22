@@ -12,7 +12,6 @@ on:
 jobs:
   DomainKontrol:
     runs-on: ubuntu-latest
-    #runs-on: self-hosted
 
     env:
       MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -24,44 +23,54 @@ jobs:
       pull-requests: write
 
     steps:
-      - name : Depo Kontrolü
-        uses : actions/checkout@v4
+      - name: Depo Kontrolü
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Tüm geçmişi çek
 
-      - name : Python 3.11.8 Yükle
-        uses : actions/setup-python@v5
-        with :
+      - name: Python 3.11.8 Yükle
+        uses: actions/setup-python@v5
+        with:
           python-version: 3.11.8
 
-      - name : Python Sürümümü Göster
-        run  : python -c "import sys; print(sys.version)"
+      - name: Python Sürümümü Göster
+        run: python -c "import sys; print(sys.version)"
 
-      - name : Gereksinimleri Yükle
-        run  : |
+      - name: Gereksinimleri Yükle
+        run: |
           python -m pip install --upgrade pip
           pip install -U setuptools wheel Kekik cloudscraper
 
-      - name : Betiği Çalıştır
-        run  : |
-          python KONTROL.py
+      - name: Betiği Çalıştır
+        run: python KONTROL.py
 
-      - name : Değişiklik Kontrolü
-        id   : degisiklik_kontrol
-        run  : |
-          git diff --quiet . || echo "degisiklik=true" >> $GITHUB_OUTPUT || true
+      - name: Debug - Git Durumu
+        run: |
+          git status
+          git log --oneline -5
+          git diff
 
-      - name : Pull Request Oluştur
-        if   : steps.degisiklik_kontrol.outputs.degisiklik == 'true'
-        run  : |
+      - name: Değişiklik Kontrolü
+        id: degisiklik_kontrol
+        run: |
+          if git diff --quiet HEAD; then
+            echo "degisiklik=false" >> $GITHUB_ENV
+          else
+            echo "degisiklik=true" >> $GITHUB_ENV
+          fi
+
+      - name: Pull Request Oluştur
+        if: env.degisiklik == 'true'
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "196586221+github-actions[bot]@users.noreply.github.com"
 
           git add -A
-
           git commit --author="sarapcanagii <sarapcanagii@users.noreply.github.com>" \
             -m "♻️ Domain Değişikliği" \
             -m "🔄 Otomatik domain güncellemeleri yapıldı."
-          BRANCH="domain-degisikligi"
 
+          BRANCH="domain-degisikligi"
           git checkout -B $BRANCH
           git push origin $BRANCH --force
 
@@ -76,4 +85,3 @@ jobs:
             "body": "🔄 Otomatik tespit edilen domain değişiklikleri uygulandı.\n\n📂 İlgili dosyalar güncellendi. Lütfen değişiklikleri gözden geçirin ve onaylayın."
           }
           EOF
-          
