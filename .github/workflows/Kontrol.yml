@@ -12,6 +12,7 @@ on:
 jobs:
   DomainKontrol:
     runs-on: ubuntu-latest
+    #runs-on: self-hosted
 
     env:
       MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -23,68 +24,47 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Depo Kontrolü
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Tüm geçmişi çek
+      - name : Depo Kontrolü
+        uses : actions/checkout@v4
 
-      - name: Python 3.11.8 Yükle
-        uses: actions/setup-python@v5
-        with:
+      - name : Python 3.11.8 Yükle
+        uses : actions/setup-python@v5
+        with :
           python-version: 3.11.8
 
-      - name: Python Sürümümü Göster
-        run: python -c "import sys; print(sys.version)"
+      - name : Python Sürümümü Göster
+        run  : python -c "import sys; print(sys.version)"
 
-      - name: Gereksinimleri Yükle
-        run: |
+      - name : Gereksinimleri Yükle
+        run  : |
           python -m pip install --upgrade pip
           pip install -U setuptools wheel Kekik cloudscraper
-      - name: Betiği Çalıştır
-        run: python KONTROL.py
-
-      - name: Debug - Git Durumu
-        run: |
-          git status
-          git log --oneline -5
-          git diff
-          
-      - name: Check if Branch Exists
-        run: |
-          if git ls-remote --heads origin domain-degisikligi | grep 'refs/heads/domain-degisikligi'; then
-            echo "Branch exists"
-            git checkout domain-degisikligi
-          else
-            echo "Branch does not exist"
-            git checkout -b domain-degisikligi
-          fi
-      
-      - name: Değişiklik Kontrolü
-        id: degisiklik_kontrol
-        run: |
+      - name : Betiği Çalıştır
+        run  : |
+          python KONTROL.py
+      - name : Değişiklik Kontrolü
+        id   : degisiklik_kontrol
+        run  : |
           git diff --quiet . || echo "degisiklik=true" >> $GITHUB_OUTPUT || true
-      
-      - name: Pull Request Oluştur
-        if: steps.degisiklik_kontrol.outputs.degisiklik == 'true'
-        run: |
+      - name : Pull Request Oluştur
+        if   : steps.degisiklik_kontrol.outputs.degisiklik == 'true'
+        run  : |
           git config user.name "github-actions[bot]"
-          git config user.email "203746723+github-actions[bot]@users.noreply.github.com"
-      
+          git config user.email "196586221+github-actions[bot]@users.noreply.github.com"
           git add -A
-      
-          git commit --author="primatzeka <primatzeka@users.noreply.github.com>" \
+          git commit --author="sarapcanagii <sarapcanagii@users.noreply.github.com>" \
             -m "♻️ Domain Değişikliği" \
             -m "🔄 Otomatik domain güncellemeleri yapıldı."
-      
-          git push origin domain-degisikligi --force
-      
+          BRANCH="domain-degisikligi"
+          git checkout -B $BRANCH
+          git push origin $BRANCH --force
           curl -X POST -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls \
             -d @- <<EOF
           {
             "title": "♻️ Domain Değişikliği",
-            "head": "domain-degisikligi",
+            "head": "$BRANCH",
             "base": "master",
             "body": "🔄 Otomatik tespit edilen domain değişiklikleri uygulandı.\n\n📂 İlgili dosyalar güncellendi. Lütfen değişiklikleri gözden geçirin ve onaylayın."
           }
