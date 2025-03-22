@@ -8,8 +8,6 @@
 
 ## Spor ve Diğer Kanalların Kaliteleri
 
-#### Kaliteler:
-
 | BeIN Sport | Tabii Spor| S Sport| Exxen Spor| Diğer|
 | :-------- | :---------- | :---- | :-------- | :-------- 
 | 720p | 1080p | 1080p | 1080p | 1080p |
