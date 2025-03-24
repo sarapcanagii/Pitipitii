@@ -1,3 +1,5 @@
+[![Görüntülenme](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/sarapcanagii/Pitipitii&title=Görüntülenme)](#)
+
 ## ÇOK ÖNEMLİ!
 
 **Eklentilerden biri çalışmıyorsa, önce çalışmayan eklentiyi silin. Ardından uygulamadan çıkıp tekrar giriş yaparak eklentiyi yeniden yükleyin.**
