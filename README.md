@@ -1,4 +1,4 @@
-[![Görüntülenme](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/sarapcanagii/Pitipitii&title=Görüntülenme)](#)
+[![Görüntülenme](https://count.getloli.com/@primatzeka?name=Prueba&theme=morden-num&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=1)](#)
 
 ## ÇOK ÖNEMLİ!
 
