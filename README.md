@@ -1,4 +1,4 @@
-[![Görüntülenme](https://count.getloli.com/@primatzeka?name=Prueba&theme=morden-num&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=1)](#)
+[![Görüntülenme](https://count.getloli.com/@primatzeka?name=Prueba&theme=morden-num&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=1)](#)
 
 ## ÇOK ÖNEMLİ!
 
