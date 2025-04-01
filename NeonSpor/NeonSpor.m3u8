@@ -19,6 +19,11 @@ https://heyhat.mevzuhls25.cfd/yayinb3.m3u8
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://heyhat.mevzuhls25.cfd/yayinb4.m3u8
 
+#EXTINF:-1 tvg-id="bein_sport" tvg-name="BeIN Sport 5" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://cdn.digiturkburada.com.tr/kanal3/kanal-buyuk/bein-sports-hd-5-buyuk.png?rkt=DfS6Tgv6Hjr93k3" group-title="BeIN-Sports",BeIN Sport 5
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
+#EXTVLCOPT:http-referrer=https://monotv523.com/
+https://heyhat.mevzuhls25.cfd/yayinb5.m3u8
+
 #EXTINF:-1 tvg-name="Tabii Spor" tvg-language="Turkish" tvg-country="TR" tvg-id="TabiiSpor" tvg-logo="https://cms-tabii-public-image.tabii.com/int/w500/43023.jpeg" group-title="TabiiSpor",Tabii Spor
 https://beert7sqimrk0bfdupfgn6qew.medya.trt.com.tr/master_1080p.m3u8
 
