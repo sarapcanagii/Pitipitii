@@ -56,7 +56,7 @@ def update_files(kt_file_path, gradle_file_path):
 
         url_match = re.search(r'override var mainUrl = "(https://dizipal\d+\.com)"', kt_content)
         if not url_match:
-            print("Error: URL pattern not found in DizipalV2.kt")
+            print("Error: URL pattern not found in DiziPal.kt")
             return False
 
         current_url = url_match.group(1)
@@ -80,7 +80,7 @@ def update_files(kt_file_path, gradle_file_path):
                 break
 
         if working_url:
-            # Update DizipalV2.kt
+            # Update DiziPal.kt
             new_kt_content = kt_content.replace(current_url, working_url)
             with open(kt_file_path, 'w', encoding='utf-8') as f:
                 f.write(new_kt_content)
@@ -121,8 +121,8 @@ def update_files(kt_file_path, gradle_file_path):
         return False
 
 if __name__ == "__main__":
-    kt_path = "DizipalV2/src/main/kotlin/com/Prueba/DizipalV2.kt"
-    gradle_path = "DizipalV2/build.gradle.kts"  # Düzeltilmiş gradle dosya yolu
+    kt_path = "DiziPal/src/main/kotlin/com/Pitipitii/DiziPal.kt"
+    gradle_path = "DiziPal/build.gradle.kts"  # Düzeltilmiş gradle dosya yolu
     
     print("Starting URL check process...")
     if update_files(kt_path, gradle_path):
