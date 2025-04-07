@@ -3,7 +3,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=https://dizipal683.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 18499,
+        "fileSize": 18908,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -13,7 +13,7 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 22,
+        "version": 26,
         "internalName": "DiziPal",
         "description": "en yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPal.cs3",
@@ -23,7 +23,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=colorhunt.co&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 17231,
+        "fileSize": 17268,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -32,9 +32,9 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 4,
+        "version": 5,
         "internalName": "NeonSpor",
-        "description": "(BeIN Spor i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Spor, Tabii Spor, S Spor, Exxen Spor ve Di\u011fer kanallar mevcuttur.",
+        "description": "(BeIN Sport i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Sport, Tabii Spor, S Sport ve Di\u011fer kanallar mevcuttur.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
         "name": "NeonSpor"
     }
