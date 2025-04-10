@@ -3,7 +3,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=https://dizipal683.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 17245,
+        "fileSize": 17244,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -13,7 +13,7 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 28,
+        "version": 29,
         "internalName": "DiziPal",
         "description": "en yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPal.cs3",
