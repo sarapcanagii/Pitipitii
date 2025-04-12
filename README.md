@@ -12,7 +12,7 @@
 
 ## Kanallar Hakkında Bilgilendirme
 
-**BeIN Sports izlemek için VPN gerekiyor, ancak diğer kanallar için VPN gerekmez.**
+**BeIN Sports ve Tivibu Spor izlemek için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
 
 ## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
