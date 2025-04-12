@@ -3,7 +3,7 @@ version = 5
 cloudstream {
     authors     = listOf("sarapcanagii")
     language    = "tr"
-    description = "(BeIN Sport için VPN Gerekebilir.) NeonSpor eklentisini de BeIN Sport, Tabii Spor, S Sport ve Diğer kanallar mevcuttur."
+    description = "(BeIN Sport ve Tivibu Spor için VPN Gerekebilir.) NeonSpor eklentisini de BeIN Sport, Tabii Spor, Tivibu Spor, S Sport ve Diğer kanallar mevcuttur."
 
     /**
      * Status int as the following:
