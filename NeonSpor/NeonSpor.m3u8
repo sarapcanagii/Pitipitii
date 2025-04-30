@@ -103,12 +103,12 @@ https://liveexxen.akamaized.net/b07fcc1db2a94487ab2d22582f31b626/eu-central-1/64
 #EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 8" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 8
 https://liveexxen.akamaized.net/16fc8c683b034525b1706f75439f14fb/eu-central-1/6415845530001/playlist.m3u8
 
-#EXTINF:-1 tvg-id="smart_spor" tvg-name="Smart Spor 1" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://upload.wikimedia.org/wikipedia/tr/3/36/Tivibu_spor_logosu.jpg" group-title="Smart-Spor",Smart Spor 1
+#EXTINF:-1 tvg-id="smart_spor" tvg-name="Smart Spor 1" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/pi8ap2a.png" group-title="Smart-Spor",Smart Spor 1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://lll.mevzuhls35.cfd/yayinsmarts.m3u8
 
-#EXTINF:-1 tvg-id="smart_spor" tvg-name="Smart Spor 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://upload.wikimedia.org/wikipedia/tr/3/36/Tivibu_spor_logosu.jpg" group-title="Smart-Spor",Smart Spor 2
+#EXTINF:-1 tvg-id="smart_spor" tvg-name="Smart Spor 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/chlr2zu.png" group-title="Smart-Spor",Smart Spor 2
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://lll.mevzuhls35.cfd/yayinsms2.m3u8
