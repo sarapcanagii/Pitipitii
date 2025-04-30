@@ -14,10 +14,10 @@
 
 ## Kanallar Hakkında Bilgilendirme
 
-**BeIN Sports ve Tivibu Spor izlemek için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
+**BeIN Sports ,Tivibu Spor ve Smart Spor izlemek için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
 
 ## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
-| BeIN Sport | Tabii Spor| S Sport| Tivibu Spor| Exxen Spor| Diğer|
-| :-------- | :---------- | :---- | :--------- | :-------- | :-------- 
+| BeIN Sport | Tabii Spor| S Sport| Tivibu Spor|  Smart Spor| Exxen Spor| Diğer|
+| :-------- | :---------- | :---- | :--------- |  :---------| :-------- | :-------- 
 | 720p | 1080p | 1080p | 720p | 1080p | 1080p |
