@@ -18,6 +18,6 @@
 
 ## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
-| BeIN Sport | Tabii Spor| S Sport| Tivibu Spor|  Smart Spor| Exxen Spor| Diğer|
-| :-------- | :---------- | :---- | :--------- |  :---------| :-------- | :-------- 
-| 720p | 1080p | 1080p | 720p | 1080p | 1080p |
+| BeIN Sport | Tabii Spor | S Sport | Tivibu Spor | Smart Spor | Exxen Spor | Diğer |
+|------------|------------|---------|--------------|-------------|-------------|--------|
+| 720p       | 1080p      | 1080p   | 720p         | 1080p       | 1080p       | 1080p   |
