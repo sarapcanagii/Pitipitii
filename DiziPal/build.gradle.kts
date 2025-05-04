@@ -7,6 +7,7 @@ cloudstream {
     status  = 1
     tvTypes = listOf("TvSeries", "Movie")
 
+
 // Bu kod sarapcanagii ve primatzeka' ya aittir. İstediginiz gibi kullanabilirsiniz.
     val mainFile = project.file("src/main/kotlin/com/Pitipitii/DiziPal.kt")
     val mainContent = mainFile.readText()
