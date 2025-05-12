@@ -3,8 +3,8 @@ name: Update Stream URLs
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Her saat başı
-  workflow_dispatch:  # Manuel tetikleme için
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
 
 jobs:
   update:
