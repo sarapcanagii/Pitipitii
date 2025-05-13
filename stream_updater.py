@@ -17,19 +17,62 @@ class StreamUpdater:
         
         self.repo_path = os.getenv('GITHUB_WORKSPACE')
         self.m3u8_path = os.path.join(self.repo_path, 'NeonSpor/NeonSpor.m3u8')
-        
-    def get_new_domain(self):
+
+    def extract_domain_from_script(self, script_content):
         try:
-            response = self.session.get('https://casintrotv12.com/domain.php')
+            # eval fonksiyonu içindeki split kısmını bul
+            split_pattern = r"'([^']+)'.split\('\|'\)"
+            match = re.search(split_pattern, script_content)
+            if match:
+                # split edilecek string'i al
+                split_string = match.group(1)
+                # string'i split et
+                parts = split_string.split('|')
+                domain_name = parts[3]  # 3. index'teki değer domain adı
+                domain_url = f"https://{domain_name}.com/domain.php"
+                logging.info(f"Domain URL bulundu: {domain_url}")
+                return domain_url
+            return None
+        except Exception as e:
+            logging.error(f"Script parse hatası: {str(e)}")
+            return None
+
+    def get_domain_php_url(self):
+        try:
+            response = self.session.get('https://monotv523.com/channel?id=yayinzirve')
+            if response.status_code != 200:
+                logging.error("monotv523.com'a erişilemedi")
+                return None
+
+            # eval fonksiyonunu içeren script'i bul
+            script_pattern = r"eval\(function\(p,a,c,k,e,d\).*?split\('\|'\),0,{}\)\)"
+            script_match = re.search(script_pattern, response.text, re.DOTALL)
+            
+            if script_match:
+                return self.extract_domain_from_script(script_match.group(0))
+            
+            logging.error("Uygun script bulunamadı")
+            return None
+
+        except Exception as e:
+            logging.error(f"domain.php URL'si alınamadı: {str(e)}")
+            return None
+
+    def get_new_domain(self):
+        domain_php_url = self.get_domain_php_url()
+        if not domain_php_url:
+            return None
+
+        try:
+            response = self.session.get(domain_php_url)
             if response.status_code == 200:
                 data = response.json()
-                # baseurl'den domain kısmını çıkar
                 new_domain = data.get('baseurl', '').rstrip('/')
                 return new_domain
             else:
-                logging.error(f"API yanıt vermedi. Status code: {response.status_code}")
+                logging.error(f"Domain API yanıt vermedi. Status code: {response.status_code}")
         except Exception as e:
-            logging.error(f"Domain alınamadı: {str(e)}")
+            logging.error(f"Yeni domain alınamadı: {str(e)}")
         return None
 
     def read_m3u8_file(self):
@@ -42,7 +85,6 @@ class StreamUpdater:
 
     def update_m3u8_content(self, content, new_domain):
         try:
-            # Mevcut domain'i bul
             current_domain_pattern = r'https://[^/]+/yayin'
             matches = re.findall(current_domain_pattern, content)
             if not matches:
@@ -55,7 +97,6 @@ class StreamUpdater:
                 logging.info("Domain zaten güncel")
                 return content
 
-            # Tüm domain referanslarını değiştir
             updated_content = content.replace(current_domain, new_domain)
             logging.info(f"Domain güncellendi: {current_domain} -> {new_domain}")
             return updated_content
