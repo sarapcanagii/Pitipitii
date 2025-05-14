@@ -74,10 +74,14 @@ https://z3mmimwz148csv0vaxtphqspf.medya.trt.com.tr/master.m3u8
 https://vbtob9hyq58eiophct5qctxr2.medya.trt.com.tr/master.m3u8
 
 #EXTINF:-1 tvg-id="ssport" tvg-name="S Sport" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/pr7mrf6.png" group-title="S-Sports",S Sport 1
-https://liveexxenpr.akamaized.net/def712eb513748218117dd97d03dafae/eu-central-1/6415845530001/playlist.m3u8?bcov_auth=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NpZCI6IjY0MTU4NDU1MzAwMDEiLCJpYXQiOjE3NDY5MDcyMzUsInRhZ3MiOlsicGFja2FnZV9mcmVlIiwicGFja2FnZV9wcmVtaXVtIiwicGFja2FnZV9zcG9ydCJdLCJjbGltaXQiOjIsInVpZCI6IjY3OTgyMDA3MjE2NDU4NDAzNjAiLCJzaWQiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM2LjAuMC4wIFNhZmFyaS81MzcuMzY2Nzk4MjAwNzIxNjQ1ODQwMzYwIiwiZXhwIjoxNzQ2OTkzNjM1fQ.auWIHPQAB4irX7dp03fkUAL23fX2qFcGZuAA31bMIaN-HoS0EsuSHSJGSE4HElwiTi56Q_kpzgSaXROFv2pDMUN0Rytp3XvRTvHaBWS_V1pMHKZ8QQDE4ipMsGb-MDC-yeQRLi9bArHzUPIZ2JMP_yi1BlY80u0Trc2U0Or-TQFN7hbJ37Khl6k8Y9UrtTcdEqre7bSRKHlf0WNsWswOQ9KqfppftgxjB0O6yIbl4tO7z8ICkbvjpVLn5uAEZlob-sKKlthd6JIhq6zfScVTZIAtTpr73NN5mgW7gvtvrQfBnqezZkudg7n5rmL70w83wsyQPAivKKv174I4BNE5gg
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
+#EXTVLCOPT:http-referrer=https://monotv523.com/
+https://6734587458734.casintrotv15.com/yayinss.m3u8
 
 #EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/l8g5zml.png" group-title="S-Sports",S Sport 2
-https://liveexxenpr.akamaized.net/bf2b6bc04ae84a73ba26f9dd83b5f072/eu-central-1/6415845530001/playlist.m3u8?bcov_auth=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NpZCI6IjY0MTU4NDU1MzAwMDEiLCJpYXQiOjE3NDY5MDY5ODEsInRhZ3MiOlsicGFja2FnZV9mcmVlIiwicGFja2FnZV9wcmVtaXVtIiwicGFja2FnZV9zcG9ydCJdLCJjbGltaXQiOjIsInVpZCI6IjY3OTgyMDA3MjE2NDU4NDAzNjAiLCJzaWQiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM2LjAuMC4wIFNhZmFyaS81MzcuMzY2Nzk4MjAwNzIxNjQ1ODQwMzYwIiwiZXhwIjoxNzQ2OTkzMzgxfQ.OE32R8Gv3-hbfwPc2WjD6dENvmRMD980GcAdT2yEuTjBhM_zVjVNiiQlX8hUeivWzNkvTy1GmxEPLRXkUUHcVzEGEEd20lOWx4diC0mdShZ_a8ObsqLHFtA8mM5f3R5c0y4FxpYH516o1hwQ76tQ3t5DveuMAT9HflhwfostBPIon-9d93rv4avYIqOY7WmGr5asd3u9r0o85tSUfQp-Y9iLB_5u8ncd7dfr73q6kdWPbSCtVAdrvp8yOjLz95eJhaZjtSeen2pcASlkuGcc6ViKtkgZx-Y7TfseZ2kzwzrOHBe-4WSkXFXL7n27W0cuDxNdwn_ZKUtCtYFGn9wLHA
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
+#EXTVLCOPT:http-referrer=https://monotv523.com/
+https://6734587458734.casintrotv15.com/yayinss2.m3u8
 
 #EXTINF:-1 tvg-id="exxenspor" tvg-name="Exxen Spor 1" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/ioxh9th.png" group-title="Exxen-Spor",Exxen Spor 1
 https://liveexxen.akamaized.net/fe1c4a0174f5439a91769ba935a1c963/eu-central-1/6415845530001/playlist.m3u8
