@@ -12,7 +12,8 @@ class StreamUpdater:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Referer': 'https://monotv523.com/'
         })
         
         self.repo_path = os.getenv('GITHUB_WORKSPACE')
@@ -20,15 +21,12 @@ class StreamUpdater:
 
     def extract_domain_from_script(self, script_content):
         try:
-            # eval fonksiyonu içindeki split kısmını bul
             split_pattern = r"'([^']+)'.split\('\|'\)"
             match = re.search(split_pattern, script_content)
             if match:
-                # split edilecek string'i al
                 split_string = match.group(1)
-                # string'i split et
                 parts = split_string.split('|')
-                domain_name = parts[3]  # 3. index'teki değer domain adı
+                domain_name = parts[3]
                 domain_url = f"https://{domain_name}.com/domain.php"
                 logging.info(f"Domain URL bulundu: {domain_url}")
                 return domain_url
@@ -44,7 +42,6 @@ class StreamUpdater:
                 logging.error("monotv523.com'a erişilemedi")
                 return None
 
-            # eval fonksiyonunu içeren script'i bul
             script_pattern = r"eval\(function\(p,a,c,k,e,d\).*?split\('\|'\),0,{}\)\)"
             script_match = re.search(script_pattern, response.text, re.DOTALL)
             
