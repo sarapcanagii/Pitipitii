@@ -106,7 +106,7 @@ class StreamUpdater:
         try:
             repo = Repo(self.repo_path)
             repo.index.add([self.m3u8_path])
-            commit_message = "🛠️ Linkler bot tarafından güncellendi"
+            commit_message = "🛠️ Auto: Linkler Güncellenmiştir"
             repo.index.commit(commit_message)
             origin = repo.remote('origin')
             origin.push()
