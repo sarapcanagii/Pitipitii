@@ -8,7 +8,7 @@
 
 ## EKLENTİYİ LİNK İLE YÜKLE!
 
-**Uygulamanın yüklü olduğu cihazda** _[depoyu otomatik yüklemek için tıklayın](https://keyiflerolsun.me/http-protocol-redirector?r=cloudstreamrepo://raw.githubusercontent.com/sarapcanagii/Pitipitii/master/repo.json)_
+**Uygulamanın yüklü olduğu cihazda** _[depoyu otomatik yüklemek için tıklayın](https://sarapcanagii.rf.gd/?r=cloudstreamrepo://raw.githubusercontent.com/sarapcanagii/Pitipitii/master/repo.json)_
   - **veya**
   - `Depo ekle` _butonuyla **manuel** ekleme yapmak isteyen arkadaşlar için_ `sarapcanagii` _**kısa kod**u mevcuttur._ `Depo ismi` _kısmını boş bırakarak_ `Depo URL'si` _kısmına_ `sarapcanagii` yazarak `Depo ekle` _demeniz yeterli.._
 
