@@ -3,7 +3,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=dizipal954.com&sz=32",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 20061,
+        "fileSize": 20395,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -13,7 +13,7 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 34,
+        "version": 35,
         "internalName": "DiziPal",
         "description": "En yeni dizileri g\u00fcvenli ve h\u0131zl\u0131 \u015fekilde sunar.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/DiziPal.cs3",
@@ -23,7 +23,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=colorhunt.co&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 17268,
+        "fileSize": 18700,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -32,7 +32,7 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 6,
+        "version": 7,
         "internalName": "NeonSpor",
         "description": "(BeIN Sport, Tivibu Spor ve Smart Spor i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Sport, Tabii Spor, Tivibu Spor, Smart Spor, S Sport ve Di\u011fer kanallar mevcuttur.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
