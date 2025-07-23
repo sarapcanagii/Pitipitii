@@ -1,5 +1,3 @@
-// ! https://codeberg.org/cloudstream/cloudstream-extensions-multilingual/src/branch/master/FreeTVProvider/src/main/kotlin/com/lagradost/FreeTVProvider.kt
-
 package com.lagradost
 
 import android.util.Log
@@ -15,7 +13,6 @@ class NeonSpor : MainAPI() {
     override val hasMainPage          = true
     override var lang                 = "tr"
     override val hasQuickSearch       = true
-    override val hasChromecastSupport = true
     override val hasDownloadSupport   = false
     override val supportedTypes       = setOf(TvType.Live)
 
@@ -32,15 +29,16 @@ class NeonSpor : MainAPI() {
                     val chGroup     = kanal.attributes["group-title"].toString()
                     val nation      = kanal.attributes["tvg-country"].toString()
 
-                    LiveSearchResponse(
-                        name      = channelname,
-                        url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                        apiName   = this@NeonSpor.name,
-                        type      = TvType.Live,
-                        posterUrl = posterurl,
-                        lang      = nation
-                    )
+                    newLiveSearchResponse(
+                        channelname,
+                        LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
+                        type = TvType.Live
+                    ) {
+                        this.posterUrl = posterurl
+                        this.lang = nation
+                    }
                 }
+
 
                 HomePageList(title, show, isHorizontalImages = true)
             },
@@ -58,14 +56,15 @@ class NeonSpor : MainAPI() {
             val chGroup     = kanal.attributes["group-title"].toString()
             val nation      = kanal.attributes["tvg-country"].toString()
 
-            LiveSearchResponse(
-                name      = channelname,
-                url       = LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
-                apiName   = this@NeonSpor.name,
-                type      = TvType.Live,
-                posterUrl = posterurl,
-                lang      = nation
-            )
+            newLiveSearchResponse(
+                channelname,
+                LoadData(streamurl, channelname, posterurl, chGroup, nation).toJson(),
+                type = TvType.Live
+            ) {
+                this.posterUrl = posterurl
+                this.lang = nation
+            }
+
         }
     }
 
@@ -73,12 +72,10 @@ class NeonSpor : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse {
         val loadData = fetchDataFromUrlOrJson(url)
-
-        val nation:String
-        if (loadData.group == "NSFW") {
-            nation = "⚠️🔞🔞🔞 » ${loadData.group} | ${loadData.nation} « 🔞🔞🔞⚠️"
+        val nation:String = if (loadData.group == "NSFW") {
+            "⚠️🔞🔞🔞 » ${loadData.group} | ${loadData.nation} « 🔞🔞🔞⚠️"
         } else {
-            nation = "» ${loadData.group} | ${loadData.nation} «"
+            "» ${loadData.group} | ${loadData.nation} «"
         }
 
         val kanallar        = IptvPlaylistParser().parseM3U(app.get(mainUrl).text)
@@ -94,47 +91,45 @@ class NeonSpor : MainAPI() {
                 val rcChGroup     = kanal.attributes["group-title"].toString()
                 val rcNation      = kanal.attributes["tvg-country"].toString()
 
-                recommendations.add(LiveSearchResponse(
-                    name      = rcChannelName,
-                    url       = LoadData(rcStreamUrl, rcChannelName, rcPosterUrl, rcChGroup, rcNation).toJson(),
-                    apiName   = this@NeonSpor.name,
-                    type      = TvType.Live,
-                    posterUrl = rcPosterUrl,
-                    lang      = rcNation,
-                ))
+                recommendations.add(newLiveSearchResponse(
+                    rcChannelName,
+                    LoadData(rcStreamUrl, rcChannelName, rcPosterUrl, rcChGroup, rcNation).toJson(),
+                    type = TvType.Live
+                ) {
+                    this.posterUrl = rcPosterUrl
+                    this.lang = rcNation
+                })
+
             }
         }
 
-        return LiveStreamLoadResponse(
-            name            = loadData.title,
-            url             = loadData.url,
-            apiName         = this.name,
-            dataUrl         = url,
-            posterUrl       = loadData.poster,
-            plot            = nation,
-            tags            = listOf(loadData.group, loadData.nation),
-            recommendations = recommendations
-        )
+        return newLiveStreamLoadResponse(loadData.title, loadData.url, url) {
+            this.posterUrl = loadData.poster
+            this.plot = nation
+            this.tags = listOf(loadData.group, loadData.nation)
+            this.recommendations = recommendations
+        }
     }
 
     override suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean {
         val loadData = fetchDataFromUrlOrJson(data)
-        Log.d("IPTV", "loadData » ${loadData}")
+        Log.d("IPTV", "loadData » $loadData")
 
         val kanallar = IptvPlaylistParser().parseM3U(app.get(mainUrl).text)
         val kanal    = kanallar.items.first { it.url == loadData.url }
-        Log.d("IPTV", "kanal » ${kanal}")
+        Log.d("IPTV", "kanal » $kanal")
 
         callback.invoke(
-            ExtractorLink(
+            newExtractorLink(
                 source  = this.name,
                 name    = this.name,
                 url     = loadData.url,
-                headers = kanal.headers,
-                referer = kanal.headers["referrer"] ?: "",
-                quality = Qualities.Unknown.value,
-                type    = ExtractorLinkType.M3U8
-            )
+                ExtractorLinkType.M3U8
+            ) {
+                this.headers = kanal.headers
+                this.referer = kanal.headers["referrer"] ?: ""
+                this.quality = Qualities.Unknown.value
+            }
         )
 
         return true
@@ -174,22 +169,10 @@ data class PlaylistItem(
 
 class IptvPlaylistParser {
 
-    /**
-     * Parse M3U8 string into [Playlist]
-     *
-     * @param content M3U8 content string.
-     * @throws PlaylistParserException if an error occurs.
-     */
     fun parseM3U(content: String): Playlist {
         return parseM3U(content.byteInputStream())
     }
 
-    /**
-     * Parse M3U8 content [InputStream] into [Playlist]
-     *
-     * @param input Stream of input data.
-     * @throws PlaylistParserException if an error occurs.
-     */
     @Throws(PlaylistParserException::class)
     fun parseM3U(input: InputStream): Playlist {
         val reader = input.bufferedReader()
@@ -276,67 +259,10 @@ class IptvPlaylistParser {
         return split(",").lastOrNull()?.replaceQuotesAndTrim()
     }
 
-    /**
-     * Get media url.
-     *
-     * Example:-
-     *
-     * Input:
-     * ```
-     * https://example.com/sample.m3u8|user-agent="Custom"
-     * ```
-     *
-     * Result: https://example.com/sample.m3u8
-     */
     private fun String.getUrl(): String? {
         return split("|").firstOrNull()?.replaceQuotesAndTrim()
     }
 
-    /**
-     * Get url parameters.
-     *
-     * Example:-
-     *
-     * Input:
-     * ```
-     * http://192.54.104.122:8080/d/abcdef/video.mp4|User-Agent=Mozilla&Referer=CustomReferrer
-     * ```
-     *
-     * Result will be equivalent to kotlin map:
-     * ```Kotlin
-     * mapOf(
-     *   "User-Agent" to "Mozilla",
-     *   "Referer" to "CustomReferrer"
-     * )
-     * ```
-     */
-    private fun String.getUrlParameters(): Map<String, String> {
-        val urlRegex      = Regex("^(.*)\\|", RegexOption.IGNORE_CASE)
-        val headersString = replace(urlRegex, "").replaceQuotesAndTrim()
-
-        return headersString
-            .split("&")
-            .mapNotNull {
-                val pair = it.split("=")
-                if (pair.size == 2) pair.first() to pair.last() else null
-            }
-            .toMap()
-    }
-
-    /**
-     * Get url parameter with key.
-     *
-     * Example:-
-     *
-     * Input:
-     * ```
-     * http://192.54.104.122:8080/d/abcdef/video.mp4|User-Agent=Mozilla&Referer=CustomReferrer
-     * ```
-     *
-     * If given key is `user-agent`, then
-     *
-     * Result: Mozilla
-     */
     private fun String.getUrlParameter(key: String): String? {
         val urlRegex     = Regex("^(.*)\\|", RegexOption.IGNORE_CASE)
         val keyRegex     = Regex("$key=(\\w[^&]*)", RegexOption.IGNORE_CASE)
@@ -345,25 +271,6 @@ class IptvPlaylistParser {
         return keyRegex.find(paramsString)?.groups?.get(1)?.value
     }
 
-    /**
-     * Get attributes from `#EXTINF` tag as Map<String, String>.
-     *
-     * Example:-
-     *
-     * Input:
-     * ```
-     * #EXTINF:-1 tvg-id="1234" group-title="Kids" tvg-logo="url/to/logo", Title
-     * ```
-     *
-     * Result will be equivalent to kotlin map:
-     * ```Kotlin
-     * mapOf(
-     *   "tvg-id" to "1234",
-     *   "group-title" to "Kids",
-     *   "tvg-logo" to "url/to/logo"
-     * )
-     * ```
-     */
     private fun String.getAttributes(): Map<String, String> {
         val extInfRegex      = Regex("(#EXTINF:.?[0-9]+)", RegexOption.IGNORE_CASE)
         val attributesString = replace(extInfRegex, "").replaceQuotesAndTrim().split(",").first()
@@ -377,18 +284,6 @@ class IptvPlaylistParser {
             .toMap()
     }
 
-    /**
-     * Get value from a tag.
-     *
-     * Example:-
-     *
-     * Input:
-     * ```
-     * #EXTVLCOPT:http-referrer=http://example.com/
-     * ```
-     *
-     * Result: http://example.com/
-     */
     private fun String.getTagValue(key: String): String? {
         val keyRegex = Regex("$key=(.*)", RegexOption.IGNORE_CASE)
 
