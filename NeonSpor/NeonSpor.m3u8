@@ -76,18 +76,18 @@ https://vbtob9hyq58eiophct5qctxr2.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-name="Tabii Spor 7" tvg-language="Turkish" tvg-country="TR" tvg-id="TabiiSpor7" tvg-logo="https://cms-rotf-api.tabii.com/r/int/w500/51612_0-0-1919-1080.jpeg" group-title="TabiiSpor",Tabii Spor 7
 https://rxnE77JupTdEYKE3TytvGQWYh.medya.trt.com.tr/master.m3u8
 
-#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/pr7mrf6.png" group-title="S-Sports",S Sport 1
+#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/f0f167c1-f2b1-41d0-9713-75c315820713.png" group-title="S-Sports",S Sport 1
 https://lemonchiffon-dotterel-347603.hostingersite.com/yayin.m3u8?id=1810
 
-#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 1 Yedek" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/pr7mrf6.png" group-title="S-Sports",S Sport 1 Yedek
+#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 1 Yedek" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/f0f167c1-f2b1-41d0-9713-75c315820713.png" group-title="S-Sports",S Sport 1 Yedek
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://6734587458734.casintrotv15.com/yayinss.m3u8
 
-#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/l8g5zml.png" group-title="S-Sports",S Sport 2
+#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/80f415bc-60e4-4dd9-8dc6-6e51d88f6abb.png" group-title="S-Sports",S Sport 2
 https://lemonchiffon-dotterel-347603.hostingersite.com/yayin.m3u8?id=3901
 
-#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2 Yedek" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://i.hizliresim.com/l8g5zml.png" group-title="S-Sports",S Sport 2 Yedek
+#EXTINF:-1 tvg-id="ssport" tvg-name="S Sport 2 Yedek" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/80f415bc-60e4-4dd9-8dc6-6e51d88f6abb.png" group-title="S-Sports",S Sport 2 Yedek
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://6734587458734.casintrotv15.com/yayinss2.m3u8
