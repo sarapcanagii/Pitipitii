@@ -82,22 +82,26 @@ class StreamUpdater:
 
     def update_m3u8_content(self, content, new_domain):
         try:
-            current_domain_pattern = r'https://[^/]+/yayin'
-            matches = re.findall(current_domain_pattern, content)
-            if not matches:
-                logging.error("Mevcut domain bulunamadı")
-                return content
-
-            current_domain = matches[0].rsplit('/yayin', 1)[0]
+            current_domain_pattern = r'(https?://[^/]+/)(?=.*yayin)'
             
-            if current_domain == new_domain:
-                logging.info("Domain zaten güncel")
+            matches = re.finditer(current_domain_pattern, content)
+            
+            if not matches:
+                logging.info("'yayin' içeren URL bulunamadı. Güncelleme gerekmiyor.")
                 return content
-
-            updated_content = content.replace(current_domain, new_domain)
-            logging.info(f"Domain güncellendi: {current_domain} -> {new_domain}")
+    
+            updated_content = content
+            for match in matches:
+                current_domain = match.group(1)
+                
+                if current_domain == new_domain + '/':
+                    continue
+                
+                updated_content = updated_content.replace(current_domain, new_domain + '/')
+                logging.info(f"Domain güncellendi: {current_domain} -> {new_domain}/")
+    
             return updated_content
-
+    
         except Exception as e:
             logging.error(f"İçerik güncelleme hatası: {str(e)}")
             return content
