@@ -32,9 +32,9 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 7,
+        "version": 8,
         "internalName": "NeonSpor",
-        "description": "(BeIN Sport, Tivibu Spor ve Smart Spor i\u00e7in VPN Gerekebilir.) NeonSpor eklentisini de BeIN Sport, Tabii Spor, Tivibu Spor, Smart Spor, S Sport ve Di\u011fer kanallar mevcuttur.",
+        "description": "(A\u00e7\u0131lmayan Spor Kanallar \u0130\u00e7in VPN Gerekebilir.) NeonSpor eklentisinde BeIN Sports, Tabii Spor, S Sports, Exxen Spor, Smart Spor, Tivibu Spor ve Di\u011fer kanallar mevcuttur.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
         "name": "NeonSpor"
     }
