@@ -1,5 +1,0 @@
-#EXTM3U
-#EXTINF:-1 tvg-id="bein_sport" tvg-name="BeIN Sport 1" tvg-language="Turkish" tvg-country="TR" tvg-logo="https://seeklogo.com/images/B/bein-sports-1-logo-4E5E4AE6B8-seeklogo.com.png" group-title="BeIN-Sports",BeIN Sport 1
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
-#EXTVLCOPT:http-referrer=https://ssportplus.com
-https://cdn.ssportplus.com/66/3165/uX4nVZ0sh6Eb/uX4nVZ0sh6Eb.mpd
