@@ -14,7 +14,7 @@
 
 ## Kanallar Hakkında Bilgilendirme
 
-**BeIN Sports ,Tivibu Spor ve Smart Spor izlemek için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
+**Spor kanalları için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
 
 ## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
