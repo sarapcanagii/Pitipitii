@@ -129,7 +129,6 @@ class DiziPal : MainAPI() {
         val year = document.selectXpath("//div[text()='Yapım Yılı']//following-sibling::div").text().trim().toIntOrNull()
         val description = document.selectFirst("div.summary p")?.text()?.trim()
         val tags = document.selectXpath("//div[text()='Türler']//following-sibling::div").text().trim().split(" ").mapNotNull { it.trim() }
-        val rating = document.selectXpath("//div[text()='IMDB Puanı']//following-sibling::div").text().trim()
         val duration = Regex("(\\d+)").find(document.selectXpath("//div[text()='Ortalama Süre']//following-sibling::div").text() ?: "")?.value?.toIntOrNull()
 
         return if (url.contains("/dizi/")) {
@@ -153,7 +152,6 @@ class DiziPal : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.score = Score.from10(rating)
                 this.duration = duration
             }
         } else {
@@ -164,7 +162,6 @@ class DiziPal : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.score = Score.from10(rating)
                 this.duration = duration
             }
         }
@@ -231,21 +228,21 @@ class DiziPal : MainAPI() {
                     else "${mainUrl}${if (!m3uLink.startsWith("/")) "/" else ""}$m3uLink"
                 } else m3uLink
     
-                callback.invoke(
-                    ExtractorLink(
-                        source = this.name,
-                        name = this.name,
-                        url = finalUrl,
-                        referer = iframe,
-                        quality = Qualities.Unknown.value,
-                        type = ExtractorLinkType.M3U8,
-                        headers = mapOf(
-                            "Referer" to iframe,
-                            "Origin" to mainUrl,
-                            "User-Agent" to USER_AGENT
-                        )
+                // Sadece master playlist'i (tüm kaliteleri içeren) ekle
+                val m3u8Links = M3u8Helper.generateM3u8(
+                    source = this.name,
+                    streamUrl = finalUrl,
+                    referer = iframe,
+                    headers = mapOf(
+                        "Referer" to iframe,
+                        "Origin" to mainUrl,
+                        "User-Agent" to USER_AGENT
                     )
                 )
+                
+                // Sadece quality == Qualities.Unknown olan linki ekle (bu master playlist'tir)
+                m3u8Links.filter { it.quality == Qualities.Unknown.value }.forEach(callback)
+                
                 return true
             } else {
                 return loadExtractor(iframe, "$mainUrl/", subtitleCallback, callback)
