@@ -23,7 +23,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=colorhunt.co&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sarapcanagii/Pitipitii",
-        "fileSize": 18812,
+        "fileSize": 18814,
         "status": 1,
         "language": "tr",
         "authors": [
@@ -32,7 +32,7 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 11,
+        "version": 12,
         "internalName": "NeonSpor",
         "description": "(A\u00e7\u0131lmayan Spor Kanallar \u0130\u00e7in VPN Gerekebilir.) NeonSpor eklentisi.",
         "url": "https://raw.githubusercontent.com/sarapcanagii/Pitipitii/builds/NeonSpor.cs3",
