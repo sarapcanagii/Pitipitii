@@ -77,20 +77,22 @@ class NeonSpor : MainAPI() {
         } else {
             "» ${loadData.group} | ${loadData.nation} «"
         }
-
+    
+        val plot = "Açılmayan kanallar için VPN gerekebilir."
+    
         val kanallar        = IptvPlaylistParser().parseM3U(app.get(mainUrl).text)
         val recommendations = mutableListOf<LiveSearchResponse>()
-
+    
         for (kanal in kanallar.items) {
             if (kanal.attributes["group-title"].toString() == loadData.group) {
                 val rcStreamUrl   = kanal.url.toString()
                 val rcChannelName = kanal.title.toString()
                 if (rcChannelName == loadData.title) continue
-
+    
                 val rcPosterUrl   = kanal.attributes["tvg-logo"].toString()
                 val rcChGroup     = kanal.attributes["group-title"].toString()
                 val rcNation      = kanal.attributes["tvg-country"].toString()
-
+    
                 recommendations.add(newLiveSearchResponse(
                     rcChannelName,
                     LoadData(rcStreamUrl, rcChannelName, rcPosterUrl, rcChGroup, rcNation).toJson(),
@@ -99,13 +101,13 @@ class NeonSpor : MainAPI() {
                     this.posterUrl = rcPosterUrl
                     this.lang = rcNation
                 })
-
+    
             }
         }
-
+    
         return newLiveStreamLoadResponse(loadData.title, loadData.url, url) {
             this.posterUrl = loadData.poster
-            this.plot = nation
+            this.plot = plot
             this.tags = listOf(loadData.group, loadData.nation)
             this.recommendations = recommendations
         }
