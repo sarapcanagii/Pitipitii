@@ -12,10 +12,6 @@
   - **veya**
   - `Depo ekle` _butonuyla **manuel** ekleme yapmak isteyen arkadaşlar için_ `sarapcanagii` _**kısa kod**u mevcuttur._ `Depo ismi` _kısmını boş bırakarak_ `Depo URL'si` _kısmına_ `sarapcanagii` yazarak `Depo ekle` _demeniz yeterli.._
 
-## Kanallar Hakkında Bilgilendirme
-
-**Spor kanalları için VPN gerekebilir, ancak diğer kanallar için VPN gerekmez.**
-
 ## NeonSpor Eklentisindeki Kanalların Kaliteleri
 
 | BeIN Sport | Tabii Spor | S Sport | Tivibu Spor | Smart Spor | Exxen Spor | Diğer |
